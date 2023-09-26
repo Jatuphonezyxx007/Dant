@@ -2189,4 +2189,42 @@ textarea.input {
   }
 }
 
+div {
+  /* border:1px solid; */
+  }
+
+  /* ICON */
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.sd-container {
+  position: relative;
+  float: left;
+}
+
+.sd {
+  padding: 5px 10px;
+  height: 30px;
+  width: 150px;
+}
+
+.open-button {
+  position: absolute;
+  top: 10px;
+  right: 11px;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  pointer-events: none;
+}
+
+.open-button button {
+  border: none;
+  background: transparent;
+}
 
