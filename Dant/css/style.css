@@ -2190,7 +2190,7 @@ textarea.input {
 }
 
 div {
-  /* border:1px solid; */
+  border:1px solid;
   }
 
   /* ICON */
@@ -2228,3 +2228,15 @@ div {
   background: transparent;
 }
 
+/* REGISTER */
+.register {
+  margin: auto;
+}
+
+
+/* LOGIN */
+.login_link {
+  color: red;
+  list-style: none;
+  text-decoration:underline;
+}
