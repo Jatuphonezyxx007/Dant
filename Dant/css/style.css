@@ -2190,7 +2190,7 @@ textarea.input {
 }
 
 div {
-  border:1px solid;
+  /* border:1px solid; */
   }
 
   /* ICON */
@@ -2239,4 +2239,9 @@ div {
   color: red;
   list-style: none;
   text-decoration:underline;
+}
+
+/* btn */
+.btn_full {
+  /* width: 100%; */
 }
