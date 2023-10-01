@@ -179,9 +179,9 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="index.html">หน้าหลัก</a></li>
+						<li><a href="index.html">หน้าหลัก</a></li>
 						<li><a href="#">ยอดนิยม</a></li>
-						<li><a href="#">คอมพิวเตอร์</a></li>
+						<li class="active"><a href="#">คอมพิวเตอร์</a></li>
 						<li><a href="#">โน๊ตบุ๊ค</a></li>
 						<li><a href="#">เมาส์</a></li>
 						<li><a href="#">คีย์บอร์ด</a></li>
@@ -207,8 +207,8 @@
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
 							<li><a href="#">All Categories</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li class="active">Headphones (227,490 Results)</li>
+							<li><a href="#">0</a></li>
+							<!-- <li class="active">Headphones (227,490 Results)</li> -->
 						</ul>
 					</div>
 				</div>
@@ -447,22 +447,23 @@
 								<div class="product">
 									<div class="product-img">
                                     <img src='img/computer/<?=$data['com_img'];?>'>
-										<div class="product-label">
+										<!-- <div class="product-label">
 											<span class="sale">-30%</span>
 											<span class="new">NEW</span>
-										</div>
+										</div> -->
 									</div>
 									<div class="product-body">
 										<!-- <p class="product-category">Category</p> -->
 										<h4 class="product-name"><a href="#"><?=$data['com_name'];?></a></h4>
-										<h5 class="product-price"><?=$data['com_price'];?> <del class="product-old-price">$990.00</del></h5>
-										<div class="product-rating">
+										<h5 class="product-price"><?=$data['com_price'];?></h5>
+										<!-- <del class="product-old-price">$990.00</del>  old price -->
+										<!-- <div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
-										</div>
+										</div> -->
 										<div class="product-btns">
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
