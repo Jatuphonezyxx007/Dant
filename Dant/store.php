@@ -446,7 +446,7 @@
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-                                    <img src='img/computer/<?=$data['com_img'];?>'>
+									<img src='img/computer/<?=$data['com_id'];?>.<?=$data['com_img'];?>'>
 										<!-- <div class="product-label">
 											<span class="sale">-30%</span>
 											<span class="new">NEW</span>
