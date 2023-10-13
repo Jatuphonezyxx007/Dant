@@ -74,7 +74,7 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form method="post" action="">
+								<form method="post" action="store2.php">
 									<select class="input-select">
 										<option value="0">ทั้งหมด</option>
 										<option value="1">คอมพิวเตอร์</option>
@@ -88,7 +88,7 @@
 										<option value="1">พาวเวอร์ซัพพลาย</option>
 										<option value="1">หูฟัง</option>
 									</select>
-									<input class="input" name="search_bar" placeholder="ค้นหาสินค้าที่ต้องการ ..." autofocus>
+									<input class="input" name="search" placeholder="ค้นหาสินค้าที่ต้องการ ..." autofocus>
 									<!-- <input type="submit" class="search-btn" name="Submit"> -->
 									<button class="search-btn" name="Submit">ค้นหา</button>
 								</form>
