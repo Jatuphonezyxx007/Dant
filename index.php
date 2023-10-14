@@ -181,12 +181,12 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="index.html">หน้าหลัก</a></li>
-						<li><a href="store.html">ยอดนิยม</a></li>
-						<li><a href="store.php">คอมพิวเตอร์</a></li>
-						<li><a href="#">โน๊ตบุ๊ค</a></li>
-						<li><a href="#">เมาส์</a></li>
-						<li><a href="#">คีย์บอร์ด</a></li>
-						<li><a href="#">อุปกรณ์เสริม</a></li>
+						<li><a href="store2.php">ยอดนิยม</a></li>
+						<li><a href="store2.php">คอมพิวเตอร์</a></li>
+						<li><a href="store2.php">โน๊ตบุ๊ค</a></li>
+						<li><a href="store2.php">เมาส์</a></li>
+						<li><a href="store2.php">คีย์บอร์ด</a></li>
+						<!-- <li><a href="store2.php">อุปกรณ์เสริม</a></li> -->
 					</ul>
 					<!-- /NAV -->
 				</div>
