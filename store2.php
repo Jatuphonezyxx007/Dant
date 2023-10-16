@@ -456,7 +456,7 @@
 									<div class="product-body">
 											<p class="product-category">Category</p>
 											<h3 class="product-name"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
-											<h4 class="product-price"><?=$data['price'];?></h4>
+											<h4 class="product-price"><?= number_format($data['price'], );?></h4>
 											<!-- <del class="product-old-price">$990.00</del>  old price -->
 										<div class="product-rating">
 											<!-- <i class="fa fa-star"></i>
@@ -479,11 +479,8 @@
 								<div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
 							</div>
 							
-						<?php
-						}
-						mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
-						?> 
 					</div>
+					?>
 				<!-- /store products -->
 
 						<!-- store bottom filter -->

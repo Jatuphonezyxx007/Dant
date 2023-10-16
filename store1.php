@@ -85,22 +85,22 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
-									<select class="input-select">
+								<form method="post" action="store1.php">
+									<select class="input-select" name="select">
 										<option value="0">ทั้งหมด</option>
 										<option value="1">คอมพิวเตอร์</option>
-										<option value="1">โน๊ตบุ๊ค</option>
-										<option value="1">เมาส์</option>
-										<option value="1">คีย์บอร์ด</option>
-										<option value="1">ซีพียู</option>
-										<option value="1">การ์ดจอ</option>
-										<option value="1">เมนบอร์ด</option>
-										<option value="1">แรม</option>
-										<option value="1">พาวเวอร์ซัพพลาย</option>
-										<option value="1">หูฟัง</option>
+										<option value="2">ซีพียู</option>
+										<option value="3">การ์ดจอ</option>
+										<option value="4">แรม</option>
+										<option value="6">พาวเวอร์ซัพพลาย</option>
+										<option value="7">เมาส์</option>
+										<option value="8">คีย์บอร์ด</option>
+										<option value="9">หูฟัง</option>
+										<option value="10">หน้าจอ</option>
+										<option value="11">โน๊ตบุ๊ค</option>
 									</select>
-									<input class="input" name="src" placeholder="ค้นหาสินค้าที่ต้องการ ...">
-									<button class="search-btn">ค้นหา</button>
+									<input class="input" name="src" placeholder="ค้นหาสินค้าที่ต้องการ ..." autofocus>
+									<button class="search-btn" name="Submit">ค้นหา</button>
 								</form>
 							</div>
 						</div>
@@ -434,16 +434,29 @@
 					<div class="row">
 							<!-- product -->
 							<?php
-                                include("connectdb.php");
-                                $sql = "SELECT * FROM `products` ";
-                                $rs = mysqli_query($conn, $sql);
-                                while ($data = mysqli_fetch_array($rs)){
-                                    ?>  
+							include("connectdb.php");
+							// รับค่าการค้นหาจากหน้า index.php
+							$search = $_POST["src"];
+							// สร้างคำสั่ง SQL เพื่อค้นหาสินค้า
+							// $sql = "SELECT * FROM products WHERE type = $select";
+							$sql = "SELECT * FROM products WHERE (`name` LIKE '%{$search}%' OR `detail` LIKE '%{$search}%')";
 
+							// if($select == 'type'){
+							// 	$sql = "SELECT * FROM products WHERE type = '$select'";
+							// }
+							// elseif ($search == 'name' or 'detail'){
+							// 	$sql = "SELECT * FROM products WHERE (`name` LIKE '%{$select}%' OR `detail` LIKE '%{$select}%')";
+							// }
+
+							// เรียกใช้คำสั่ง SQL
+							$rs = mysqli_query($conn, $sql);
+							while ($data = mysqli_fetch_array($rs)){
+								?>   
+			
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-									<img src='imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
+									<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
 										<!-- <div class="product-label">
 											<span class="sale">-30%</span>
 											<span class="new">NEW</span>
@@ -462,23 +475,23 @@
 											<i class="fa fa-star"></i>
 										</div> -->
 										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+											<!-- <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button> -->
 										</div>
 									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
+									<!-- <div >
+										<button class="btn btn-danger"><i class="fa fa-shopping-cart"></i> add to cart</button>
+									</div> -->
 								</div>
 
 								<div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
 							</div>
 							
-						<?php
-						        mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
-						}
-						?> 
+							<?php
+							}
+							mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+							?> 
 					</div>
 				<!-- /store products -->
 

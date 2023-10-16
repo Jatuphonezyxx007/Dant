@@ -89,7 +89,7 @@
 										<option value="1">หูฟัง</option>
 									</select>
 									<input class="input" placeholder="ค้นหาสินค้าที่ต้องการ ...">
-									<button class="search-btn">Search</button>
+									<button class="search-btn">ค้นหา</button>
 								</form>
 							</div>
 						</div>
@@ -227,30 +227,30 @@
 				<?php
 				include("connectdb.php");
 
-				$sql = "SELECT * FROM `computer` WHERE `com_id` = '{$_GET['id']}'";
-				$rs = mysqli_query($conn, $sql);
+				$sql = "SELECT * FROM `products` WHERE `id` = '{$_GET['id']}'";
+				$rs = mysqli_query($conn, $sql,);
 				$data = mysqli_fetch_array($rs); 
-
-?>
+				?>
 
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
 							<div class="product-preview">
-							<img src='img/computer/<?=$data['com_id'];?>.<?=$data['com_img'];?>'>
+							<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>'>
+							
 							</div>
 
-							<div class="product-preview">
+							<!-- <div class="product-preview">
 								<img src="./img/product03.png" alt="">
-							</div>
+							</div> -->
 
-							<div class="product-preview">
+							<!-- <div class="product-preview">
 								<img src="./img/product06.png" alt="">
-							</div>
+							</div> -->
 
-							<div class="product-preview">
+							<!-- <div class="product-preview">
 								<img src="./img/product08.png" alt="">
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<!-- /Product main img -->
@@ -259,20 +259,20 @@
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
 							<div class="product-preview">
-							<img src='img/computer/<?=$data['com_id'];?>.<?=$data['com_img'];?>'>
+								<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>'>
 							</div>
 
-							<div class="product-preview">
+							<!-- <div class="product-preview">
 								<img src="./img/product03.png" alt="">
-							</div>
+							</div> -->
 
-							<div class="product-preview">
+							<!-- <div class="product-preview">
 								<img src="./img/product06.png" alt="">
-							</div>
+							</div> -->
 
-							<div class="product-preview">
+							<!-- <div class="product-preview">
 								<img src="./img/product08.png" alt="">
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
@@ -280,8 +280,8 @@
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
-							<h2 class="product-name"><?=$data['com_name'];?></h2>
-							<div>
+							<h2 class="product-name"><?=$data['name'];?></h2>
+							<!-- <div>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
@@ -290,11 +290,11 @@
 									<i class="fa fa-star-o"></i>
 								</div>
 								<a class="review-link" href="#">10 Review(s) | Add your review</a>
-							</div>
+							</div> -->
 							<div>
-								<h3 class="product-price"><?=$data['com_price'];?> 
+								<h3 class="product-price">฿ <?= number_format($data['price'], );?> 
 								<!-- <del class="product-old-price">$990.00</del></h3> -->
-								<span class="product-available">In Stock</span>
+								<!-- <span class="product-available">In Stock</span> -->
 							</div>
 							<p><?=$data['com_detail'];?></p>
 
@@ -315,9 +315,9 @@
 
 							<div class="add-to-cart">
 								<div class="qty-label">
-									Qty
+									จำนวน
 									<div class="input-number">
-										<input type="number">
+										<input class="text-center" type="number" value="1">
 										<span class="qty-up">+</span>
 										<span class="qty-down">-</span>
 									</div>
@@ -325,24 +325,23 @@
 								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 							</div>
 
-							<ul class="product-btns">
+							<!-- <ul class="product-btns">
 								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 								<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-							</ul>
+							</ul> -->
 
 							<ul class="product-links">
-								<li>Category:</li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Accessories</a></li>
+								<li>หมวดหมู่ :</li>
+								<li><a><?=$data['t_name'];?></a></li>
 							</ul>
 
-							<ul class="product-links">
+							<!-- <ul class="product-links">
 								<li>Share:</li>
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 								<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-							</ul>
+							</ul> -->
 
 						</div>
 					</div>
@@ -365,7 +364,7 @@
 								<div id="tab1" class="tab-pane fade in active">
 									<div class="row">
 										<div class="col-md-12">
-											<p><?=$data['com_detail'];?></p>
+											<p><?=nl2br($data['detail']);?></p>
 										</div>
 									</div>
 								</div>

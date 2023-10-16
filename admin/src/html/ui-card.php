@@ -30,6 +30,13 @@
       'wght' 400,
       'GRAD' 0,
       'opsz' 24
+
+      .truncate {
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+}
 }
 
 </style>
@@ -237,6 +244,7 @@
                   @$src = $_POST['src'];
                   $sql = "SELECT * FROM `products` WHERE (`name` LIKE '%{$src}%' OR `detail` LIKE '%{$src}%')";
                   $rs = mysqli_query($conn, $sql);
+                  
                   while ($data = mysqli_fetch_array($rs)){
                     ?>   
                     
@@ -244,10 +252,10 @@
                       <br>
 
                       <div class="card">
-                        <img src="../assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>" class="card-img-top" alt="" height="300px">
+                        <img src="../assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>" class="card-img-top" alt="" height="350px">
                         <div class="card-body">
                           <h8 class="card-title d-inline-block text-truncate" style="max-width: 150px;"><?=$data['name'];?></h8>
-                          <p class="card-text"></p></p><?=$data['price'];?> บาท</p>
+                          <p class="card-text"><?= number_format($data['price'], );?> บาท</p>
                           <a href="#" class="btn btn-primary">รายละเอียด</a>
                           <a href="update.php?id=<?=$data['id'];?>"class="btn btn-warning">แก้ไข</a>
                           <a href="#"class="btn btn-danger">ลบ</a>
@@ -259,6 +267,10 @@
         }
         mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
         ?> 
+        
+        <a href="#top" class="text-end">กลับไปบนสุด <span class="material-symbols-outlined">
+arrow_upward
+</span></a>
 
               </div>
             </div>

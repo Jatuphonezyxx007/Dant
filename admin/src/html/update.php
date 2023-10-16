@@ -1,3 +1,11 @@
+<?php
+                include("connectdb.php");
+                $sql = "SELECT * FROM `products` WHERE `id` = '{$_GET['id']}'";
+                $rs = mysqli_query($conn, $sql);
+                $data = mysqli_fetch_array($rs); 
+                ?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -227,53 +235,55 @@ document.getElementById('rs_txtForJs2').innerHTML=countTxt
       </header>
       <!--  Header End -->
 
+      <!-- START CARD -->
+
       <div class="container-fluid">
         <div class="container-fluid">
           <div class="card">
             <div class="card-body">
+
               <h5 class="card-title fw-semibold mb-4">แก้ไขรายการสินค้า</h5>
               <h6 class="card-subtitle fw-normal mb-4">สำคัญ : โปรดตรวจสอบว่าได้กรอกชื่อสินค้า รายละเอียด ราคาสินค้า อัปโหลดรูปภาพสินค้า และเลือกหมวดหมู่ที่ถูกต้องก่อนทำการเผยแพร่สินค้า</h6>
+
               <div class="card">
                 <div class="card-body">
 
-                <?php
-                include("connectdb.php");
-                $sql = "SELECT * FROM `products` WHERE `id` = '{$_GET['id']}'";
-                $rs = mysqli_query($conn, $sql);
-                $data = mysqli_fetch_array($rs); 
-                ?>
-
-                  <form method="post" action="" enctype="multipart/form-data">
+              <form method="post" action="" enctype="multipart/form-data">
 
                   <div class="container">
                     <div class="row">
-                      <div class="col textr">
+                      <div class="col text-center">
                         <div class="card" style="width: 18rem;">
                         <img src="../assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>" class="card-img-top rounded mx-auto d-block" alt="" height="300px">
                       </div>
                     </div>
 
                     <div class="col">
-                      
-                      </div>
+                    <!-- <div class="mb-3"> -->
+                      <label for="img_product" class="form-label">รูปภาพสินค้า</label>
+                      <input class="form-control" type="file" name="picture"><br>
+                      <h6 class="card-subtitle fw-normal mb-4">สำคัญ : สามารถอัพโหลดรูปภาพเฉพาะไฟล์ png, jpg, gif, tfif และ webp</h6>
+                    <!-- </div> -->
                     </div>
+                  </div>
+                </div>
 
 
-                    <div class="mb-3">
-                      <label for="n_product" class="form-label">ชื่อสินค้า</label>
+                <div class="mb-3">
+                  <label for="n_product" class="form-label">ชื่อสินค้า</label>
 
                       <div class="input-group">
-                      <input name="txtForJs1" id="txtForJs1" type="text" class="form-control" size="10" onkeyup="countTextJs1()" maxlength="80" placeholder="ใส่ค่าข้อมูล" autofocus required> 
-                      <span class="input-group-text" id="rs_txtForJs1">0</span>
-                      <span class="input-group-text">/ 80</span>
+                        <input type="text" name="p_name" class="form-control" size="10" onkeyup="countTextJs1()" maxlength="80" placeholder="ใส่ค่าข้อมูล" autofocus required value="<?=$data['name'];?>"> 
+                        <span class="input-group-text" id="rs_txtForJs1">0</span>
+                        <span class="input-group-text">/ 80</span>
                       </div>
                       <br>
 
-                    <label for="d_product" class="form-label">รายละเอียดสินค้า</label>
-                    <div class="form-floating">
-                      <textarea class="form-control" placeholder="d_product" id="detail_product" style="height: 150px"></textarea>
-                      <label for="detail_product">รายละเอียดสินค้า</label>
-                    </div>
+                  <label for="d_product" class="form-label">รายละเอียดสินค้า</label>
+                  <div class="form-floating">
+                    <textarea name="detail_product" class="form-control" style="height: 250px"><?=$data['detail'];?></textarea>
+                    <label for="detail_product">รายละเอียดสินค้า</label>
+                  </div>
                     <br>
 
 
@@ -281,7 +291,7 @@ document.getElementById('rs_txtForJs2').innerHTML=countTxt
                     <div class="row g-2">
                       <div class="col-md">
                         <div class="form-floating">
-                          <input type="text" class="form-control" id="p_product" placeholder="ราคา">
+                          <input type="text" name="p_product" class="form-control" required value="<?=$data['price'];?>">
                           <label for="floatingInputGrid">ราคา / บาท</label>
                         </div>
                       </div>
@@ -290,7 +300,7 @@ document.getElementById('rs_txtForJs2').innerHTML=countTxt
 
                       <div class="col-md">
                         <div class="form-floating">
-                          <select class="form-select" id="type_product" aria-label="type_product" name="type_product">
+                          <select name="type_product" class="form-select">
                             <?php
                             include("connectdb.php");
                             $sql2 = "SELECT * FROM `type`";
@@ -302,23 +312,19 @@ document.getElementById('rs_txtForJs2').innerHTML=countTxt
                               <?php } ?>
                           </select>
                           <label for="floatingSelectGrid">ประเภทสินค้า</label>
-                          
                         </div>
                       </div>
+
                     </div>
                     <br>
 
 
-                    <div class="mb-3">
-                      <label for="img_product" class="form-label">รูปภาพสินค้า</label>
-                      <input class="form-control" type="file" id="formFile"><br>
-                      <h6 class="card-subtitle fw-normal mb-4">สำคัญ : สามารถอัพโหลดรูปภาพเฉพาะไฟล์ png, jpg, gif, tfif และ webp</h6>
-                    </div>
 
-                    <button type="submit" class="btn btn-primary" style="float:right">บันทึกข้อมูล</button>     
-
-                  </form>
+                    <button type="submit" class="btn btn-primary" style="float:right">บันทึกข้อมูล</button>
                 </div>
+              </form>
+
+                  </div>
               </div>
 
             </div>
@@ -326,38 +332,36 @@ document.getElementById('rs_txtForJs2').innerHTML=countTxt
         </div>
       </div>
     </div>
-  </div>
+<!-- END CARD -->
 
-  <?php
+</div>
+
+<?php
 if(isset($_POST['submit'])){
-
-    $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif', 'webp');
-    $filename = $_FILES['picture']['name'];
-    $ext = pathinfo($filename, PATHINFO_EXTENSION);
-    if (!in_array($ext, $allowed)) {
-        echo "<script>";
-        echo "alert('บันทึกข้อมูลสินค้าไม่สำเร็จ! ไฟล์รูปต้องเป็น png, jpg, gif, tfif, หรือ webp เท่านั้น');";
-        echo "</script>";
-        exit;
+    if($_FILES['picture']['name']!=""){
+        $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif', 'webp');
+        $filename = $_FILES['picture']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if (!in_array($ext, $allowed)) {
+            echo "<script>";
+            echo "alert('แก้ไขข้อมูลสินค้าไม่สำเร็จ! ไฟล์รูปต้องเป็น gif png jpg tfif  หรือ webp เท่านั้น');";
+            echo "</script>";
+            exit;
+        } 
+        @copy($_FILES['picture']['tmp_name'], "..\imgs".$idd.".".$ext);
+        $sql = "UPDATE `products` SET `name`='{$_POST['p_name']}', `detail`='{$_POST['detail_product']}', `price`='{$_POST['p_product']}', `img`='{$ext}', `type`='{$_POST['type_product']}' WHERE `id`='{$_GET['id']}';";
+    } else {
+        $sql = "UPDATE `products` SET `name`='{$_POST['p_name']}', `detail`='{$_POST['detail_product']}', `price`='{$_POST['p_product']}', `type`='{$_POST['type_product']}' WHERE `id`='{$_GET['id']}';";
     }
-
-    $sql2 = "INSERT INTO `products` (`id`, `name`, `price`, `img`, `detail`, `type`) VALUES (NULL, '{$_POST['n_product']}', '{$_POST['d_product']}', '{$_POST['p_product']}', '{$ext}', '{$_POST['type']}');";
-    mysqli_query($conn, $sql2) or die ("เพิ่มข้อมูลสินค้าไม่สำเร็จ");
-    mysqli_insert_id($conn);
-    $idd = mysqli_insert_id($conn);
-
-    @copy($_FILES['picture']['tmp_name'], "..\imgs".$idd.".".$ext);
-
+    //var_dump($s
+    mysqli_query($conn, $sql) or die("แก้ไขข้อมูลสินค้าไม่ได้");
     echo"<script>";
-    echo "alert('เพิ่มข้อมูลสินค้าสำเร็จ');";
-    echo"window.location='ui-forms.php';";
+    echo "alert('แก้ไขข้อมูลสำเร็จ');";
+    echo "window.location='index.php';";
     echo"</script>";
-
-
-
-}
-
+}    
 ?>
+
 
 
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>

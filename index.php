@@ -32,6 +32,9 @@
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
 
+
+
+
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -65,35 +68,39 @@
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="index.php" class="logo">
-									<img src="img/DANT.png" alt="icon" width="250px">
+									<img src="admin/src/assets/images/logos/dant.png" alt="icon" width="250px">
 								</a>
 							</div>
 						</div>
 						<!-- /LOGO -->
 
 						<!-- SEARCH BAR -->
+
+
 						<div class="col-md-6">
 							<div class="header-search">
-								<form method="post" action="store2.php">
-									<select class="input-select">
+								<form method="post" action="store1.php">
+									<select class="input-select" name="select">
 										<option value="0">ทั้งหมด</option>
 										<option value="1">คอมพิวเตอร์</option>
-										<option value="1">โน๊ตบุ๊ค</option>
-										<option value="1">เมาส์</option>
-										<option value="1">คีย์บอร์ด</option>
-										<option value="1">ซีพียู</option>
-										<option value="1">การ์ดจอ</option>
-										<option value="1">เมนบอร์ด</option>
-										<option value="1">แรม</option>
-										<option value="1">พาวเวอร์ซัพพลาย</option>
-										<option value="1">หูฟัง</option>
+										<option value="2">ซีพียู</option>
+										<option value="3">การ์ดจอ</option>
+										<option value="4">แรม</option>
+										<option value="6">พาวเวอร์ซัพพลาย</option>
+										<option value="7">เมาส์</option>
+										<option value="8">คีย์บอร์ด</option>
+										<option value="9">หูฟัง</option>
+										<option value="10">หน้าจอ</option>
+										<option value="11">โน๊ตบุ๊ค</option>
 									</select>
-									<input class="input" name="search" placeholder="ค้นหาสินค้าที่ต้องการ ..." autofocus>
-									<!-- <input type="submit" class="search-btn" name="Submit"> -->
+									<input class="input" name="src" placeholder="ค้นหาสินค้าที่ต้องการ ..." autofocus>
 									<button class="search-btn" name="Submit">ค้นหา</button>
 								</form>
 							</div>
 						</div>
+
+
+
 						<!-- /SEARCH BAR -->
 
 						<!-- ACCOUNT -->
@@ -180,12 +187,12 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="index.html">หน้าหลัก</a></li>
-						<li><a href="store2.php">ยอดนิยม</a></li>
-						<li><a href="store2.php">คอมพิวเตอร์</a></li>
-						<li><a href="store2.php">โน๊ตบุ๊ค</a></li>
-						<li><a href="store2.php">เมาส์</a></li>
-						<li><a href="store2.php">คีย์บอร์ด</a></li>
+						<li class="active"><a href="index.php">หน้าหลัก</a></li>
+						<li><a href="">ยอดนิยม</a></li>
+						<li><a href="store_com.php">คอมพิวเตอร์</a></li>
+						<li><a href="">โน๊ตบุ๊ค</a></li>
+						<li><a href="">เมาส์</a></li>
+						<li><a href="">คีย์บอร์ด</a></li>
 						<!-- <li><a href="store2.php">อุปกรณ์เสริม</a></li> -->
 					</ul>
 					<!-- /NAV -->
@@ -206,7 +213,7 @@
 					<div class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="shop-img">
-								<img src="img/ComputerCollection.jpg" alt="" height="250">
+								<img src="admin/src/assets/images/img_board/ComputerCollection.jpg" alt="" height="250">
 							</div>
 							<div class="shop-body">
 								<h3>Computer<br>Collection</h3>
@@ -220,7 +227,7 @@
 					<div class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="shop-img">
-								<img src="img/LaptopCollection.jpg" alt="" height="250">
+								<img src="admin/src/assets/images/img_board/LaptopCollection.jpg" alt="" height="250">
 							</div>
 							<div class="shop-body">
 								<h3>Laptops<br>Collection</h3>
@@ -234,7 +241,7 @@
 					<div class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="shop-img">
-								<img src="img/AssCollection.png" alt="" height="250">
+								<img src="admin/src/assets/images/img_board/AssCollection.png" alt="" height="250">
 							</div>
 							<div class="shop-body">
 								<h3>Accessories<br>Collection</h3>

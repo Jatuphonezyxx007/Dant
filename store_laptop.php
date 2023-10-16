@@ -85,30 +85,26 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
-									<select class="input-select">
+								<form method="post" action="store1.php">
+									<select class="input-select" name="select">
 										<option value="0">ทั้งหมด</option>
 										<option value="1">คอมพิวเตอร์</option>
-										<option value="1">โน๊ตบุ๊ค</option>
-										<option value="1">เมาส์</option>
-										<option value="1">คีย์บอร์ด</option>
-										<option value="1">ซีพียู</option>
-										<option value="1">การ์ดจอ</option>
-										<option value="1">เมนบอร์ด</option>
-										<option value="1">แรม</option>
-										<option value="1">พาวเวอร์ซัพพลาย</option>
-										<option value="1">หูฟัง</option>
+										<option value="2">ซีพียู</option>
+										<option value="3">การ์ดจอ</option>
+										<option value="4">แรม</option>
+										<option value="6">พาวเวอร์ซัพพลาย</option>
+										<option value="7">เมาส์</option>
+										<option value="8">คีย์บอร์ด</option>
+										<option value="9">หูฟัง</option>
+										<option value="10">หน้าจอ</option>
+										<option value="11">โน๊ตบุ๊ค</option>
 									</select>
-									<input class="input" name="src" placeholder="ค้นหาสินค้าที่ต้องการ ...">
-									<button class="search-btn">ค้นหา</button>
+									<input class="input" name="src" placeholder="ค้นหาสินค้าที่ต้องการ ..." autofocus>
+									<button class="search-btn" name="Submit">ค้นหา</button>
 								</form>
 							</div>
 						</div>
 						<!-- /SEARCH BAR -->
-
-
-
-
 
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
@@ -196,7 +192,7 @@
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="index.php">หน้าหลัก</a></li>
 						<li><a href="#">ยอดนิยม</a></li>
-						<li><a href="#">คอมพิวเตอร์</a></li>
+						<li class="active"><a href="#">คอมพิวเตอร์</a></li>
 						<li><a href="#">โน๊ตบุ๊ค</a></li>
 						<li><a href="#">เมาส์</a></li>
 						<li><a href="#">คีย์บอร์ด</a></li>
@@ -430,16 +426,15 @@
 						<!-- /store top filter -->
 
 						<!-- store products -->
-						
 					<div class="row">
-							<!-- product -->
-							<?php
+						<?php
                                 include("connectdb.php");
-                                $sql = "SELECT * FROM `products` ";
+                                $sql = "SELECT * FROM products WHERE type = 11";
                                 $rs = mysqli_query($conn, $sql);
-                                while ($data = mysqli_fetch_array($rs)){
+								while ($data = mysqli_fetch_array($rs)){
+								
                                     ?>  
-
+							<!-- product -->
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
@@ -476,8 +471,8 @@
 							</div>
 							
 						<?php
-						        mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
 						}
+						mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
 						?> 
 					</div>
 				<!-- /store products -->
@@ -502,8 +497,6 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-
-
 
 		<!-- LINE FOOTER -->
 		<div id="newsletter" class="section">
