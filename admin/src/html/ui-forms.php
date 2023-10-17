@@ -255,9 +255,9 @@ myModal.addEventListener('shown.bs.modal', function () {
 
                       <label for="n_product" class="form-label">ชื่อสินค้า</label>
                       <div class="input-group">
-                      <input name="p_name" id="txtForJs1" type="text" class="form-control" size="10" onkeyup="countTextJs1()" maxlength="80" placeholder="ใส่ค่าข้อมูล" autofocus required> 
+                      <input name="p_name" id="txtForJs1" type="text" class="form-control" size="10" onkeyup="countTextJs1()" maxlength="100" placeholder="ใส่ค่าข้อมูล" autofocus required> 
                       <span class="input-group-text" id="rs_txtForJs1">0</span>
-                      <span class="input-group-text">/ 80</span>
+                      <span class="input-group-text">/ 100</span>
                       </div>
                       <br>
 
@@ -301,33 +301,11 @@ myModal.addEventListener('shown.bs.modal', function () {
 
                     <div class="mb-3">
                       <label for="img_product" class="form-label">รูปภาพสินค้า</label>
-                      <input class="form-control" name="p_pics" type="file" id="formFile"><br>
+                      <input class="form-control" name="p_pics" type="file"><br>
                       <h6 class="card-subtitle fw-normal mb-4">สำคัญ : สามารถอัพโหลดรูปภาพเฉพาะไฟล์ png, jpg, gif, tfif และ webp</h6>
                     </div>
 
                     <button type="submit" name="submit" class="btn btn-primary" style="float:right">บันทึกข้อมูล</button>     
-
-                    <!-- Button trigger modal -->
-                    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="save" style="float:right">บันทึกข้อมูล</button> -->
-                    
-                    <!-- Modal -->
-                    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">สำคัญ</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            * โปรดตรวจสอบว่าได้อัปโหลดรูปภาพสินค้า กรอกชื่อสินค้า และเลือกหมวดหมู่ที่ถูกต้องก่อนเผยแพร่สินค้า
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
-                            <button type="button" class="btn btn-primary" type="submit" name="submit"></button></button>บันทึกข้อมูล</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div> -->
 
                     </div>
                   </form>
@@ -352,14 +330,15 @@ if(isset($_POST['submit'])){
     echo "</script>";
     exit;
   }
-  $sql2 = "INSERT INTO `products` (`id`, `name`, `price`, `img`, `detail`, `type`) VALUES (NULL, '{$_POST['p_name']}', '{$_POST['p_price']}','{$ext}', '{$_POST['p_detail']}', '{$_POST['p_type']}');";
+  $sql2 = "INSERT INTO `products` (`id`, `name`, `price`, `img`, `detail`, `type`) VALUES (NULL, '{$_POST['p_name']}', '{$_POST['p_price']}', '{$ext}', '{$_POST['p_detail']}', '{$_POST['p_type']}');";
   mysqli_query($conn, $sql2) or die ("เพิ่มข้อมูลสินค้าไม่สำเร็จ");
   mysqli_insert_id($conn);
   $idd = mysqli_insert_id($conn);
-  @copy($_FILES['picture']['tmp_name'], "..\imgs".$idd.".".$ext);
+
+  @copy($_FILES['p_pics']['tmp_name'], "../assets/images/imgs/".$idd.".".$ext);
   echo"<script>";
   echo "alert('เพิ่มข้อมูลสินค้าสำเร็จ');";
-  echo"window.location='ui-forms.php';";
+  echo"window.location='ui-card.php';";
   echo"</script>";
 }
 

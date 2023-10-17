@@ -40,7 +40,14 @@
 }
 
 </style>
-  </style>
+
+<script>
+  const myModal = document.getElementById('myModal')
+  const myInput = document.getElementById('myInput')
+  myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+})
+</script>
 
 </head>
 
@@ -237,7 +244,8 @@
                     <input class="form-control me-3" type="search" name="src" placeholder="ค้นหาสินค้า" aria-label="Search">
                     <button class="btn btn-outline-danger" type="submit"><span class="material-symbols-outlined"> search</span>
                   </button>
-                  </form>
+                </form>
+
 
                   <?php
                   include("connectdb.php");
@@ -251,6 +259,7 @@
                     <div class="col-md-4">
                       <br>
 
+                    <form method="post" action="">
                       <div class="card">
                         <img src="../assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>" class="card-img-top" alt="" height="350px">
                         <div class="card-body">
@@ -258,10 +267,38 @@
                           <p class="card-text"><?= number_format($data['price'], );?> บาท</p>
                           <a href="#" class="btn btn-primary">รายละเอียด</a>
                           <a href="update.php?id=<?=$data['id'];?>"class="btn btn-warning">แก้ไข</a>
-                          <a href="#"class="btn btn-danger">ลบ</a>
+
+                          <!-- <a href="delete.php?id=<?=$data['p_id'];?>&ext=<?=$data['p_img'];?>" class="btn btn-danger">ลบ</a> -->
+                          
+                          <!-- Button trigger modal -->
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">ลบ
+                          </button>
+
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">ยืนยันการลบ</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  โปรดตรวจสอบรายละเอียดสินค้าก่อนทำการลบ !
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                                  <button type="button" class="btn btn-primary" href="delete.php?id<?=$data['p_id'];?>&ext=<?=$data['p_img'];?>">ยืนยัน</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
                         </div>
                       </div>
-                    </div>
+                    </form>
+                  </div>
+
+
 
                 <?php
         }

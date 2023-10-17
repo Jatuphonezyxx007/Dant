@@ -234,9 +234,9 @@
 								<h6 class="sub-title">ยินดีต้อนรับลูกค้าทุกท่านเข้าสู่ครอบครัวของเรา Dant</h6>
 							</div>
 
-
+						<form method="post" action="">
 							<div class="form-group">
-								<input class="input" type="text" name="name" placeholder="ชื่อ - นามสกุล" required>
+								<input class="input" type="text" name="name" placeholder="ชื่อ - นามสกุล" required autofocus>
 							</div>
 
 
@@ -273,7 +273,6 @@
 								</div>
 							</form> -->
 
-
 							<div class="form-group">
 								<input class="input" type="date" name="bof" placeholder="วัน / เดือน / ปีเกิด">
 								<!-- <span class="material-symbols-outlined"> 
@@ -295,6 +294,7 @@
 							<!-- <div class="form-group">
 								<input class="input" type="tel" name="tel" placeholder="Telephone">
 							</div> -->
+						</form>
 							<div class="form-group">
 							</div>
 						</div>

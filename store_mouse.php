@@ -192,9 +192,9 @@
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="index.php">หน้าหลัก</a></li>
 						<li><a href="store_pop.php">ยอดนิยม</a></li>
-						<li class="active"><a href="store_com.php">คอมพิวเตอร์</a></li>
+						<li><a href="store_com.php">คอมพิวเตอร์</a></li>
 						<li><a href="store_laptop.php">โน๊ตบุ๊ค</a></li>
-						<li><a href="store_mouse.php">เมาส์</a></li>
+						<li class="active"><a href="store_mouse.php">เมาส์</a></li>
 						<li><a href="store_keyboard.php">คีย์บอร์ด</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -428,7 +428,7 @@
 					<div class="row">
 						<?php
                                 include("connectdb.php");
-                                $sql = "SELECT * FROM products WHERE type = 1";
+                                $sql = "SELECT * FROM products WHERE type = 7";
                                 $rs = mysqli_query($conn, $sql);
 								while ($data = mysqli_fetch_array($rs)){
 								

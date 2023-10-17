@@ -49,6 +49,14 @@ function countTextJs2(){//ฟังก์ชั่นนับจำนวนต
 countTxt=txtForJs2.length-countTxtNull;//จำนวนตัวอักษรทั้งหมด-จำนวนช่องว่าง=จำนวนตัวอักษรไม่รวมช่องว่าง
 document.getElementById('rs_txtForJs2').innerHTML=countTxt
 }
+
+const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+})
+
 </script>
 
 </head>
@@ -261,7 +269,7 @@ document.getElementById('rs_txtForJs2').innerHTML=countTxt
                     <div class="col">
                     <!-- <div class="mb-3"> -->
                       <label for="img_product" class="form-label">รูปภาพสินค้า</label>
-                      <input class="form-control" type="file" name="picture"><br>
+                      <input class="form-control" type="file" name="p_pics"><br>
                       <h6 class="card-subtitle fw-normal mb-4">สำคัญ : สามารถอัพโหลดรูปภาพเฉพาะไฟล์ png, jpg, gif, tfif และ webp</h6>
                     <!-- </div> -->
                     </div>
@@ -273,15 +281,17 @@ document.getElementById('rs_txtForJs2').innerHTML=countTxt
                   <label for="n_product" class="form-label">ชื่อสินค้า</label>
 
                       <div class="input-group">
-                        <input type="text" name="p_name" class="form-control" size="10" onkeyup="countTextJs1()" maxlength="80" placeholder="ใส่ค่าข้อมูล" autofocus required value="<?=$data['name'];?>"> 
+
+                        <input name="p_name" id="txtForJs1" type="text" class="form-control" size="10" onkeyup="countTextJs1()" maxlength="100" placeholder="ใส่ค่าข้อมูล" autofocus required value="<?=$data['name'];?>"> 
+
                         <span class="input-group-text" id="rs_txtForJs1">0</span>
-                        <span class="input-group-text">/ 80</span>
+                        <span class="input-group-text">/ 100</span>
                       </div>
                       <br>
 
                   <label for="d_product" class="form-label">รายละเอียดสินค้า</label>
                   <div class="form-floating">
-                    <textarea name="detail_product" class="form-control" style="height: 250px"><?=$data['detail'];?></textarea>
+                    <textarea name="p_detail" class="form-control" style="height: 250px"><?=$data['detail'];?></textarea>
                     <label for="detail_product">รายละเอียดสินค้า</label>
                   </div>
                     <br>
@@ -291,7 +301,7 @@ document.getElementById('rs_txtForJs2').innerHTML=countTxt
                     <div class="row g-2">
                       <div class="col-md">
                         <div class="form-floating">
-                          <input type="text" name="p_product" class="form-control" required value="<?=$data['price'];?>">
+                          <input type="text" name="p_price" class="form-control" required value="<?=$data['price'];?>">
                           <label for="floatingInputGrid">ราคา / บาท</label>
                         </div>
                       </div>
@@ -300,7 +310,7 @@ document.getElementById('rs_txtForJs2').innerHTML=countTxt
 
                       <div class="col-md">
                         <div class="form-floating">
-                          <select name="type_product" class="form-select">
+                          <select class="form-select" id="type_product" aria-label="type_product" name="p_type">
                             <?php
                             include("connectdb.php");
                             $sql2 = "SELECT * FROM `type`";
@@ -320,7 +330,30 @@ document.getElementById('rs_txtForJs2').innerHTML=countTxt
 
 
 
-                    <button type="submit" class="btn btn-primary" style="float:right">บันทึกข้อมูล</button>
+                    <button type="submit" name="submit" class="btn btn-primary" style="float:right">บันทึกข้อมูล</button>
+
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
                 </div>
               </form>
 
@@ -338,26 +371,28 @@ document.getElementById('rs_txtForJs2').innerHTML=countTxt
 
 <?php
 if(isset($_POST['submit'])){
-    if($_FILES['picture']['name']!=""){
+    if($_FILES['p_pics']['name']!=""){
         $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif', 'webp');
-        $filename = $_FILES['picture']['name'];
+        $filename = $_FILES['p_pics']['name'];
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
+
         if (!in_array($ext, $allowed)) {
-            echo "<script>";
-            echo "alert('แก้ไขข้อมูลสินค้าไม่สำเร็จ! ไฟล์รูปต้องเป็น gif png jpg tfif  หรือ webp เท่านั้น');";
-            echo "</script>";
-            exit;
+          echo "<script>";
+          echo "alert('แก้ไขข้อมูลสินค้าไม่สำเร็จ! ไฟล์รูปต้องเป็น jpg gif หรือ png เท่านั้น');";
+          echo "</script>";
+          exit;
         } 
-        @copy($_FILES['picture']['tmp_name'], "..\imgs".$idd.".".$ext);
-        $sql = "UPDATE `products` SET `name`='{$_POST['p_name']}', `detail`='{$_POST['detail_product']}', `price`='{$_POST['p_product']}', `img`='{$ext}', `type`='{$_POST['type_product']}' WHERE `id`='{$_GET['id']}';";
+        @copy($_FILES['p_pics']['tmp_name'], "..\assets/images/imgs/".$_GET['id'].".".$ext);
+
+        $sql = "UPDATE `products` SET `name`='{$_POST['p_name']}', `detail`='{$_POST['p_detail']}', `price`='{$_POST['p_price']}', `img`='{$ext}', `type`='{$_POST['p_type']}' WHERE `id`='{$_GET['id']}';";
     } else {
-        $sql = "UPDATE `products` SET `name`='{$_POST['p_name']}', `detail`='{$_POST['detail_product']}', `price`='{$_POST['p_product']}', `type`='{$_POST['type_product']}' WHERE `id`='{$_GET['id']}';";
+        $sql = "UPDATE `products` SET `name`='{$_POST['p_name']}', `detail`='{$_POST['p_detail']}', `price`='{$_POST['p_price']}', `type`='{$_POST['p_type']}' WHERE `id`='{$_GET['id']}';";
     }
     //var_dump($s
     mysqli_query($conn, $sql) or die("แก้ไขข้อมูลสินค้าไม่ได้");
     echo"<script>";
     echo "alert('แก้ไขข้อมูลสำเร็จ');";
-    echo "window.location='index.php';";
+    echo "window.location=ui-card.php';";
     echo"</script>";
 }    
 ?>

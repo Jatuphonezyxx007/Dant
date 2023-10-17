@@ -52,7 +52,7 @@
 				<div class="container">
 					<ul class="header-links pull-right">
 						<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
-						<li><a href="sign_up.html"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
+						<li><a href="sign_up.php"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
 					</ul>
 				</div>
 			</div>
@@ -188,12 +188,11 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="index.php">หน้าหลัก</a></li>
-						<li><a href="">ยอดนิยม</a></li>
+						<li><a href="store_pop.php">ยอดนิยม</a></li>
 						<li><a href="store_com.php">คอมพิวเตอร์</a></li>
-						<li><a href="">โน๊ตบุ๊ค</a></li>
-						<li><a href="">เมาส์</a></li>
-						<li><a href="">คีย์บอร์ด</a></li>
-						<!-- <li><a href="store2.php">อุปกรณ์เสริม</a></li> -->
+						<li><a href="store_laptop.php">โน๊ตบุ๊ค</a></li>
+						<li><a href="store_mouse.php">เมาส์</a></li>
+						<li><a href="store_keyboard.php">คีย์บอร์ด</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -217,7 +216,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Computer<br>Collection</h3>
-								<a href="store.php" class="cta-btn">สั่งซื้อเลย <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="store_com.php" class="cta-btn">สั่งซื้อเลย <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -231,7 +230,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Laptops<br>Collection</h3>
-								<a href="store.html" class="cta-btn">สั่งซื้อเลย <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="store_laptop.php" class="cta-btn">สั่งซื้อเลย <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -245,7 +244,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Accessories<br>Collection</h3>
-								<a href="store.html" class="cta-btn">สั่งซื้อเลย <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="store1.php" class="cta-btn">สั่งซื้อเลย <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -270,7 +269,7 @@
 							<h3 class="title">สินค้าขายดียอดนิยม</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#">ดูทั้งหมด</a></li>
+									<li class="active"><a data-toggle="tab" href="store1.php">ดูทั้งหมด</a></li>
 									<!-- <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
 									<li><a data-toggle="tab" href="#tab1">Cameras</a></li>
 									<li><a data-toggle="tab" href="#tab1">Accessories</a></li> -->
@@ -335,16 +334,16 @@
 												<h3 class="product-name"><a href="#">product name goes here</a></h3>
 												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 												<div class="product-rating">
+													<!-- <i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i> -->
 												</div>
 												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+													<!-- <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button> -->
 												</div>
 											</div>
 											<div class="add-to-cart">
