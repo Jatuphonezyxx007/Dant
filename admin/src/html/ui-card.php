@@ -47,6 +47,8 @@
   myModal.addEventListener('shown.bs.modal', () => {
   myInput.focus()
 })
+
+
 </script>
 
 </head>
@@ -246,56 +248,57 @@
                   </button>
                 </form>
 
-
-                  <?php
+                <?php
                   include("connectdb.php");
                   @$src = $_POST['src'];
-                  $sql = "SELECT * FROM `products` WHERE (`name` LIKE '%{$src}%' OR `detail` LIKE '%{$src}%')";
+                  $sql = "SELECT * FROM `products`  WHERE (`name` LIKE '%{$src}%' OR `detail` LIKE '%{$src}%') ORDER BY `products`.`type` ASC";
+                  // SELECT * FROM `products` ORDER BY `products`.`type` ASC
                   $rs = mysqli_query($conn, $sql);
                   
                   while ($data = mysqli_fetch_array($rs)){
                     ?>   
+
                     
                     <div class="col-md-4">
                       <br>
 
-                    <form method="post" action="">
                       <div class="card">
                         <img src="../assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>" class="card-img-top" alt="" height="350px">
                         <div class="card-body">
                           <h8 class="card-title d-inline-block text-truncate" style="max-width: 150px;"><?=$data['name'];?></h8>
                           <p class="card-text"><?= number_format($data['price'], );?> บาท</p>
-                          <a href="#" class="btn btn-primary">รายละเอียด</a>
-                          <a href="update.php?id=<?=$data['id'];?>"class="btn btn-warning">แก้ไข</a>
+                          <a href="update.php?id=<?=$data['id'];?>" class="btn btn-primary">รายละเอียด / แก้ไข</a>
+                          <!-- <a href="update.php?id=<?=$data['id'];?>"class="btn btn-warning">แก้ไข</a> -->
+                          <a href="delete.php?id=<?=$data['id'];?>&ext=<?=$data['img'];?>" type="button" class="btn btn-danger" onClick="return confirm('ยืนยันการลบ ?')"; >ลบสินค้า</a>
 
-                          <!-- <a href="delete.php?id=<?=$data['p_id'];?>&ext=<?=$data['p_img'];?>" class="btn btn-danger">ลบ</a> -->
                           
-                          <!-- Button trigger modal -->
-                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">ลบ
-                          </button>
-
+                          <!-- <div>Button trigger modal
+                          <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">ลบ</a> 
+ -->
                           <!-- Modal -->
-                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <h1 class="modal-title fs-5" id="exampleModalLabel">ยืนยันการลบ</h1>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
                                 </div>
                                 <div class="modal-body">
                                   โปรดตรวจสอบรายละเอียดสินค้าก่อนทำการลบ !
                                 </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
-                                  <button type="button" class="btn btn-primary" href="delete.php?id<?=$data['p_id'];?>&ext=<?=$data['p_img'];?>">ยืนยัน</button>
+                                <div class="modal-footer"> -->
+                                  <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button> -->
+
+                                  <!-- <a  type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">ปิด</a>
+
+
                                 </div>
                               </div>
                             </div>
-                          </div>
-
+                          </div>-->
                         </div>
                       </div>
-                    </form>
+
                   </div>
 
 
@@ -305,9 +308,8 @@
         mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
         ?> 
         
-        <a href="#top" class="text-end">กลับไปบนสุด <span class="material-symbols-outlined">
-arrow_upward
-</span></a>
+        <a href="#top" class="text-end">กลับไปบนสุด</a>
+
 
               </div>
             </div>

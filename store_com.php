@@ -437,7 +437,7 @@
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-									<img src='imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
+									<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
 										<!-- <div class="product-label">
 											<span class="sale">-30%</span>
 											<span class="new">NEW</span>

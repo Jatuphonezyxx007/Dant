@@ -439,7 +439,8 @@
 							$search = $_POST["src"];
 							// สร้างคำสั่ง SQL เพื่อค้นหาสินค้า
 							// $sql = "SELECT * FROM products WHERE type = $select";
-							$sql = "SELECT * FROM products WHERE (`name` LIKE '%{$search}%' OR `detail` LIKE '%{$search}%')";
+							$sql = "SELECT * FROM `products`  WHERE (`name` LIKE '%{$src}%' OR `detail` LIKE '%{$src}%') ORDER BY `products`.`type` ASC";
+							// $sql = "SELECT * FROM products WHERE (`name` LIKE '%{$search}%' OR `detail` LIKE '%{$search}%')";
 
 							// if($select == 'type'){
 							// 	$sql = "SELECT * FROM products WHERE type = '$select'";

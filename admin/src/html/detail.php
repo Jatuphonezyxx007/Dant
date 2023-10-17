@@ -17,22 +17,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
   <style>
     body{
       font-family: 'Prompt', sans-serif;
     }
-    
-    .material-symbols-outlined {
-      font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24
-}
-
-</style>
   </style>
 
 </head>
@@ -219,53 +208,33 @@
       </header>
       <!--  Header End -->
 
-      <div class="container-fluid">
-        <div class="container-fluid">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-              <h5 class="card-title fw-semibold mb-4">สินค้าของฉัน</h5>
 
-              <form method="post" action="" class="d-flex" role="search">
-                    <input class="form-control me-3" type="search" name="src" placeholder="ค้นหาสินค้า" aria-label="Search">
-                    <button class="btn btn-outline-danger" type="submit"><span class="material-symbols-outlined"> search</span>
-                  </button>
-                  </form><br>
-
-
-                  <?php
+      <?php
                   include("connectdb.php");
                   @$src = $_POST['src'];
                   $sql = "SELECT * FROM `products` WHERE (`name` LIKE '%{$src}%' OR `detail` LIKE '%{$src}%')";
                   $rs = mysqli_query($conn, $sql);
+                  
                   while ($data = mysqli_fetch_array($rs)){
                     ?>   
 
-                    
-                    <div class="card text">
-                      <div class="card-header"><?=$data[''];?></div>
-                      <div class="card-body">
-                        <h5 class="card-title"><?=$data['name'];?></h5>
-                        <h8 class="card-text">รายละเอียดสินค้า : </h8>
-                        <p class="card-text"><?=$data['detail'];?><br></p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                      </div>
-                      <div class="card-footer text-body-secondary">
-                        2 days ago
-                      </div>
-                    </div>
-
-                <?php
-        }
-        mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
-        ?> 
-
-              </div>
-            </div>
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">รายละเอียดสินค้า</h5>
+            <img src="../assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>" class="rounded mx-auto d-block" alt="..." height="300"><br><br>
+            <form action="" method="post">
+            <input class="form-control" type="text" name="name" value="<?=$data['name'];?>">
+            </form>
+            <p class="mb-0">This is a sample page </p>
           </div>
         </div>
       </div>
 
+      <?php
+        }
+        mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+        ?> 
 
     </div>
   </div>

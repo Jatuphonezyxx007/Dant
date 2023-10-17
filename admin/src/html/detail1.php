@@ -1,11 +1,3 @@
-<?php
-                include("connectdb.php");
-                $sql = "SELECT * FROM `products` WHERE `id` = '{$_GET['id']}'";
-                $rs = mysqli_query($conn, $sql);
-                $data = mysqli_fetch_array($rs); 
-                ?>
-
-
 <!doctype html>
 <html lang="en">
 
@@ -21,43 +13,27 @@
 
 
 
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-  <style type="text/css">
+  <style>
     body{
       font-family: 'Prompt', sans-serif;
     }
+    
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+}
+
+</style>
   </style>
-
-  <script type="text/javascript">
-  function countTextJs1(){//ฟังก์ชั่นนับจำนวนตัวอักษรรวมช่องว่าง
-    var txtForJs1=document.getElementById('txtForJs1').value;
-    var countTxt=txtForJs1.length;
-    document.getElementById('rs_txtForJs1').innerHTML=countTxt
-}
-function countTextJs2(){//ฟังก์ชั่นนับจำนวนตัวอักษรไม่รวมช่องว่าง
-  var txtForJs2=document.getElementById('txtForJs2').value;
-  var countTxtNull=0;
-  var countTxt=0;
-  try{
-    countTxtNull=txtForJs2.match(/\s/g).length;//นับจำนวนช่องว่าง
-}catch(e){}
-countTxt=txtForJs2.length-countTxtNull;//จำนวนตัวอักษรทั้งหมด-จำนวนช่องว่าง=จำนวนตัวอักษรไม่รวมช่องว่าง
-document.getElementById('rs_txtForJs2').innerHTML=countTxt
-}
-
-const myModal = document.getElementById('myModal')
-const myInput = document.getElementById('myInput')
-
-myModal.addEventListener('shown.bs.modal', () => {
-  myInput.focus()
-})
-
-</script>
 
 </head>
 
@@ -243,162 +219,56 @@ myModal.addEventListener('shown.bs.modal', () => {
       </header>
       <!--  Header End -->
 
-      <!-- START CARD -->
-
       <div class="container-fluid">
         <div class="container-fluid">
           <div class="card">
             <div class="card-body">
+              <div class="row">
+              <h5 class="card-title fw-semibold mb-4">สินค้าของฉัน</h5>
 
-              <h5 class="card-title fw-semibold mb-4">แก้ไขรายการสินค้า</h5>
-              <h6 class="card-subtitle fw-normal mb-4">สำคัญ : โปรดตรวจสอบว่าได้กรอกชื่อสินค้า รายละเอียด ราคาสินค้า อัปโหลดรูปภาพสินค้า และเลือกหมวดหมู่ที่ถูกต้องก่อนทำการเผยแพร่สินค้า</h6>
+              <form method="post" action="" class="d-flex" role="search">
+                    <input class="form-control me-3" type="search" name="src" placeholder="ค้นหาสินค้า" aria-label="Search">
+                    <button class="btn btn-outline-danger" type="submit"><span class="material-symbols-outlined"> search</span>
+                  </button>
+                  </form><br>
 
-              <div class="card">
-                <div class="card-body">
 
-              <form method="post" action="" enctype="multipart/form-data">
+                  <?php
+                  include("connectdb.php");
+                  @$src = $_POST['src'];
+                  $sql = "SELECT * FROM `products` WHERE (`name` LIKE '%{$src}%' OR `detail` LIKE '%{$src}%')";
+                  $rs = mysqli_query($conn, $sql);
+                  while ($data = mysqli_fetch_array($rs)){
+                    ?>   
 
-                  <div class="container">
-                    <div class="row">
-                      <div class="col text-center">
-                        <div class="card" style="width: 18rem;">
-                        <img src="../assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>" class="card-img-top rounded mx-auto d-block" alt="" height="300px">
+                    
+                    <div class="card text">
+                      <div class="card-header"><?=$data[''];?></div>
+                      <div class="card-body">
+                        <h5 class="card-title"><?=$data['name'];?></h5>
+                        <h8 class="card-text">รายละเอียดสินค้า : </h8>
+                        <p class="card-text"><?=$data['detail'];?><br></p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                      <div class="card-footer text-body-secondary">
+                        2 days ago
                       </div>
                     </div>
 
-                    <div class="col">
-                    <!-- <div class="mb-3"> -->
-                      <label for="img_product" class="form-label">รูปภาพสินค้า</label>
-                      <input class="form-control" type="file" name="p_pics"><br>
-                      <h6 class="card-subtitle fw-normal mb-4">สำคัญ : สามารถอัพโหลดรูปภาพเฉพาะไฟล์ png, jpg, gif, tfif และ webp</h6>
-                    <!-- </div> -->
-                    </div>
-                  </div>
-                </div>
+                <?php
+        }
+        mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+        ?> 
 
-
-                <div class="mb-3">
-                  <label for="n_product" class="form-label">ชื่อสินค้า</label>
-
-                      <div class="input-group">
-
-                        <input name="p_name" id="txtForJs1" type="text" class="form-control" size="10" onkeyup="countTextJs1()" maxlength="100" placeholder="ใส่ค่าข้อมูล" value="<?=$data['name'];?>"> 
-
-                        <span class="input-group-text" id="rs_txtForJs1">0</span>
-                        <span class="input-group-text">/ 100</span>
-                      </div>
-                      <br>
-
-                  <label for="d_product" class="form-label">รายละเอียดสินค้า</label>
-                  <div class="form-floating">
-                    <textarea name="p_detail" class="form-control" style="height: 250px"><?=$data['detail'];?></textarea>
-                    <label for="detail_product">รายละเอียดสินค้า</label>
-                  </div>
-                    <br>
-
-
-                    <label for="p_product" class="form-label">ราคาสินค้าต่อชิ้น : ขายปลีก</label>
-                    <div class="row g-2">
-                      <div class="col-md">
-                        <div class="form-floating">
-                          <input type="text" name="p_price" class="form-control" required value="<?=$data['price'];?>">
-                          <label for="floatingInputGrid">ราคา / บาท</label>
-                        </div>
-                      </div>
-                      <br>
-
-
-                      <div class="col-md">
-                        <div class="form-floating">
-                          <select class="form-select" id="type_product" aria-label="type_product" name="p_type">
-                            <?php
-                            include("connectdb.php");
-                            $sql2 = "SELECT * FROM `type`";
-                            $rs2 = mysqli_query($conn, $sql2);
-                            while ($data2 = mysqli_fetch_array($rs2)){
-                              ?>
-                              <option value="<?=$data2['t_id'];?>"<?=($data2['t_id']==$data['type'])?"selected":"";?>>
-                              <?=$data2['t_name'];?></option>  
-                              <?php } ?>
-                          </select>
-                          <label for="floatingSelectGrid">ประเภทสินค้า</label>
-                        </div>
-                      </div>
-
-                    </div>
-                    <br>
-
-
-
-                    <button type="submit" name="submit" class="btn btn-primary" style="float:right">บันทึกข้อมูล</button>
-
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-                </div>
-              </form>
-
-                  </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
+
+
     </div>
-<!-- END CARD -->
-
-</div>
-
-<?php
-if(isset($_POST['submit'])){
-    if($_FILES['p_pics']['name']!=""){
-        $allowed = array('gif', 'png', 'jpg', 'jpeg', 'jfif', 'webp');
-        $filename = $_FILES['p_pics']['name'];
-        $ext = pathinfo($filename, PATHINFO_EXTENSION);
-
-        if (!in_array($ext, $allowed)) {
-          echo "<script>";
-          echo "alert('แก้ไขข้อมูลสินค้าไม่สำเร็จ! ไฟล์รูปต้องเป็น jpg gif หรือ png เท่านั้น');";
-          echo "</script>";
-          exit;
-        } 
-        @copy($_FILES['p_pics']['tmp_name'], "..\assets/images/imgs/".$_GET['id'].".".$ext);
-
-        $sql = "UPDATE `products` SET `name`='{$_POST['p_name']}', `detail`='{$_POST['p_detail']}', `price`='{$_POST['p_price']}', `img`='{$ext}', `type`='{$_POST['p_type']}' WHERE `id`='{$_GET['id']}';";
-    } else {
-        $sql = "UPDATE `products` SET `name`='{$_POST['p_name']}', `detail`='{$_POST['p_detail']}', `price`='{$_POST['p_price']}', `type`='{$_POST['p_type']}' WHERE `id`='{$_GET['id']}';";
-    }
-    //var_dump($s
-    mysqli_query($conn, $sql) or die("แก้ไขข้อมูลสินค้าไม่ได้");
-    echo"<script>";
-    echo "alert('แก้ไขข้อมูลสำเร็จ');";
-    echo "window.location=ui-card.php';";
-    echo"</script>";
-}    
-?>
-
-
-
+  </div>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>
