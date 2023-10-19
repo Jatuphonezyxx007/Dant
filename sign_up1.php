@@ -33,29 +33,28 @@
  		<!-- Custom stlylesheet -->
  		<link type="text/css" rel="stylesheet" href="css/style.css"/>
 
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+		<!-- ICON -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-		<script type="text/javascript">
-		$(function () {
-			$('#datetimepicker1').datetimepicker();
-		});
-		</script>
+		 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
 
-
+ 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+ 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+ 		<!--[if lt IE 9]>
+ 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+ 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+ 		<![endif]-->
 
     </head>
 	<body>
+		<!-- HEADER -->
+		<header>
 			<!-- TOP HEADER -->
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-right">
+						<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
 						<li><a href="#"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
-						<li><a href="./admin/src/html/index.php"><i class="fa fa-lock"></i> ADMIN</a></li>
 					</ul>
 				</div>
 			</div>
@@ -70,8 +69,8 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
-									<img src="img/DANT.png" alt="icon" width="250px">
+								<a href="index.php" class="logo">
+									<img src="admin/src/assets/images/logos/dant.png" alt="icon" width="250px">
 								</a>
 							</div>
 						</div>
@@ -201,101 +200,132 @@
 		</nav>
 		<!-- /NAVIGATION -->
 
-		<!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Checkout</h3>
-						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li class="active">Checkout</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
-
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
 				<div class="row">
+					<div class="col-md-6">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">ลงทะเบียน</h3><br>
+								<h6 class="sub-title">ยินดีต้อนรับลูกค้าทุกท่านเข้าสู่ครอบครัวของเรา Dant</h6>
+							</div>
 
-					<div class="col-md-3">
-					</div>
-
-					<!-- Order Details -->
-					<div class="col-md-5 order-details">
-						<div class="section-title text-center">
-							<h3 class="title">สมัครบัญชี</h3> <br><br>
-							<h6 class="sub-title">ยินดีต้อนรับลูกค้าทุกท่านเข้าสู่ครอบครัวของเรา Dant</h6>
-						</div>
-						<form method="post" action="" enctype="multipart/form-data">
-							<input type="text" class="form-control" name="c_name" placeholder="ชื่อ - นามสกุล" autofocus><br>
-							<input type="tel" class="form-control"name="c_tel"placeholder="เบอร์โทร" maxlength="10"><br>
-							<input type="email" class="form-control" name="c_email" placeholder="อีเมล์"><br>
-							<input type="password" class="form-control"name="c_pwd"placeholder="รหัสผ่าน"><br>
-
-							<button class="primary-btn order-submit"name="submit">สมัครสมาชิก</button>
-						<!-- <a href="#" class="primary-btn order-submit" name="submit">สมัครสมาชิก</a> -->
-						</form>
-
-						<?php
-						if(isset($_POST['submit'])){
-							include("connectdb.php");
-							$sql = "INSERT INTO `member` (`mem_id`, `mem_name`, `mem_email`, `mem_pwd`, `mem_phone`) VALUES (Null,'{$_POST['c_name']}','{$_POST['c_email']}', 'MD5({$_POST['mem_pwd']})', '{$_POST['c_tel']}');";
-							mysqli_query($conn, $sql) or die ("ไม่สามารถสมัครบัญชีได้");
 							
-							echo"<script>";
-							echo"alert ('สมัครสมาชิกเรียบร้อยแล้ว');";
-							echo"window.location='index.php';";
-							echo"</script>";
-						}
-						?>
+						<form method="post" action="">
+							<div class="form-group">
+								<input class="input" type="text" name="name" placeholder="ชื่อ - นามสกุล" required autofocus>
+							</div>
 
+
+							<!-- <div class="form-group">
+								<div style="float: left;">
+									<input class="input" type="text" name="name" placeholder="ชื่อ" required>
+								</div>
+
+								<div style="float:right">
+									<input class="input" type="text" name="last-name" placeholder="นามสกุล" required>
+								</div>
+							</div>-->
+						<!-- <div class="d-flex align-items-center justify-content-between">
+							<div class="form-floating floating-group w-100" style="margin-right: 0.5rem;">
+							<input type="text" name="firstname" class="form-control form-resgiter CHANGE_BG_INPUT" id="input_name" placeholder="ขื่อ" required="">
+							<label for="input_name" class="active">ชื่อ</label>
+							<div class="invalid-feedback position-absolute">กรุณากรอกข้อมูล
+							</div>
+							</div>
+							<div class="form-floating floating-group w-100">
+							<input type="text" name="lastname" class="form-control form-resgiter CHANGE_BG_INPUT" id="input_last" placeholder="นามสกุล" required="">
+							<label for="input_last" class="active">นามสกุล</label>
+							<div class="invalid-feedback position-absolute">กรุณากรอกข้อมูล
+							</div>
+							</div>
+							</div> -->
+
+							<!-- <form>
+								<div class="sd-container">
+									<input class="sd" type="date" name="selected_date" />
+									<span class="open-button">
+									<button type="button">📅</button>
+								</span>
+								</div>
+							</form> -->
+
+							<div class="form-group">
+								<input class="input" type="date" name="bof" placeholder="วัน / เดือน / ปีเกิด">
+								<!-- <span class="material-symbols-outlined"> 
+									calendar_month
+									</span> -->
+							</div>
+							<div class="form-group">
+								<input class="input" type="email" name="email" placeholder="อีเมล์" required>
+							</div>
+							<div class="form-group">
+								<input class="input" type="tel" name="phone" placeholder="เบอร์โทร" maxlength="10">
+							</div>
+							<div class="form-group">
+								<input class="input" type="password" name="f-pass" placeholder="รหัสผ่าน">
+							</div>
+							<div class="form-group">
+								<input class="input" type="password" name="cf-pass" placeholder="ยืนยันรหัสผ่าน">
+							</div>
+							<!-- <div class="form-group">
+								<input class="input" type="tel" name="tel" placeholder="Telephone">
+							</div> -->
+						</form>
+							<div class="form-group">
+							</div>
+						</div>
 					</div>
+				</div>
+						<!-- /Billing Details -->
+
+						<a href="#" class="primary-btn order-submit">สร้างบัญชี</a>
+						<br>
+						<br>
+
+
 
 	
 
-<!-- <script>
-function checkPassword() {
-	 // รับค่ารหัสผ่านจาก input ทั้งสองช่อง
-	const password = document.querySelector("input[name='c_pwd']").value;
-	const confirmPassword = document.querySelector("input[name='con_pwd']").value;
-	// เปรียบเทียบค่าทั้งสองช่อง
-	if (password === confirmPassword) {
-		// รหัสผ่านตรงกัน
-		return true;
-	} else {
-		// รหัสผ่านไม่ตรงกัน
-		return false;
-	}
-}
-// เพิ่ม event listener ให้กับ input type="submit"
-document.querySelector("input[type='submit']").addEventListener("click", function() {
-	// ตรวจสอบว่ารหัสผ่านตรงกันหรือไม่
-	if (!checkPassword()) {
-		// รหัสผ่านไม่ตรงกัน แสดงข้อความแจ้งเตือน
-		alert("รหัสผ่านไม่ตรงกัน");
-		return false;
-    }
-});
-</script> -->
-
-					<!-- /Order Details -->
-				</div>
+		<!-- NEWSLETTER -->
+		<!-- <div id="newsletter" class="section"> -->
+			<!-- container -->
+			<!-- <div class="container"> -->
+				<!-- row -->
+				<!-- <div class="row">
+					<div class="col-md-12">
+						<div class="newsletter">
+							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
+							<form>
+								<input class="input" type="email" placeholder="Enter Your Email">
+								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+							</form>
+							<ul class="newsletter-follow">
+								<li>
+									<a href="#"><i class="fa fa-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-instagram"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-pinterest"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div> -->
 				<!-- /row -->
-			</div>
+			<!-- </div> -->
 			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
+		<!-- </div> -->
+		<!-- /NEWSLETTER -->
 
 		<!-- LINE FOOTER -->
 		<div id="newsletter" class="section">
@@ -305,7 +335,6 @@ document.querySelector("input[type='submit']").addEventListener("click", functio
 			<!-- /container -->
 		</div>
 		<!-- /LINE FOOTER -->
-
 
 
 		<!-- FOOTER -->
@@ -385,10 +414,6 @@ document.querySelector("input[type='submit']").addEventListener("click", functio
 		</footer>
 		<!-- /FOOTER -->
 
-
-
-
-
 		<!-- jQuery Plugins -->
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
@@ -398,4 +423,5 @@ document.querySelector("input[type='submit']").addEventListener("click", functio
 		<script src="js/main.js"></script>
 
 	</body>
+	
 </html>

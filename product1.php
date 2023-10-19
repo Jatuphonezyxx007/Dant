@@ -51,8 +51,8 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-right">
+						<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
 						<li><a href="#"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
-						<li><a href="./admin/src/html/index.php"><i class="fa fa-lock"></i> ADMIN</a></li>
 					</ul>
 				</div>
 			</div>
@@ -113,25 +113,25 @@
 
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" href="checkout.php">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>รถเข็น</span>
-										<!-- <div class="qty"></div> -->
+										<div class="qty">3</div>
 									</a>
-									<!-- <div class="cart-dropdown">
+									<div class="cart-dropdown">
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
 													<img src="./img/product01.png" alt="">
-												</div> -->
-												<!-- <div class="product-body">
+												</div>
+												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
 													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div> -->
-												<!-- <button class="delete"><i class="fa fa-close"></i></button> -->
-											<!-- </div> -->
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+											</div>
 
-											<!-- <div class="product-widget">
+											<div class="product-widget">
 												<div class="product-img">
 													<img src="./img/product02.png" alt="">
 												</div>
@@ -140,17 +140,17 @@
 													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
 												</div>
 												<button class="delete"><i class="fa fa-close"></i></button>
-											</div> -->
-										<!-- </div> -->
-										<!-- <div class="cart-summary">
+											</div>
+										</div>
+										<div class="cart-summary">
 											<small>3 Item(s) selected</small>
 											<h5>SUBTOTAL: $2940.00</h5>
-										</div> -->
-										<!-- <div class="cart-btns"> -->
-											<!-- <a href="#"></a> -->
-											<!-- <a href="#">ดูรถเข็นของฉัน  <i class="fa fa-arrow-circle-right"></i></a>
-										</div> -->
-									<!-- </div> -->
+										</div>
+										<div class="cart-btns">
+											<a href="#">View Cart</a>
+											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+										</div>
+									</div>
 								</div>
 								<!-- /Cart -->
 
@@ -208,9 +208,11 @@
 				<?php
 				include("connectdb.php");
 
+				if (isset($_POST['add_cart'])) {
 				$sql = "SELECT * FROM `products` WHERE `id` = '{$_GET['id']}'";
 				$rs = mysqli_query($conn, $sql,);
 				$data = mysqli_fetch_array($rs); 
+				}
 				?>
 
 					<!-- Product main img -->
@@ -220,18 +222,6 @@
 							<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>'>
 							
 							</div>
-
-							<!-- <div class="product-preview">
-								<img src="./img/product03.png" alt="">
-							</div> -->
-
-							<!-- <div class="product-preview">
-								<img src="./img/product06.png" alt="">
-							</div> -->
-
-							<!-- <div class="product-preview">
-								<img src="./img/product08.png" alt="">
-							</div> -->
 						</div>
 					</div>
 					<!-- /Product main img -->
@@ -242,18 +232,6 @@
 							<div class="product-preview">
 								<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>'>
 							</div>
-
-							<!-- <div class="product-preview">
-								<img src="./img/product03.png" alt="">
-							</div> -->
-
-							<!-- <div class="product-preview">
-								<img src="./img/product06.png" alt="">
-							</div> -->
-
-							<!-- <div class="product-preview">
-								<img src="./img/product08.png" alt="">
-							</div> -->
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
@@ -262,57 +240,25 @@
 					<div class="col-md-5">
 						<div class="product-details">
 							<h2 class="product-name"><?=$data['name'];?></h2>
-							<!-- <div>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
-								</div>
-								<a class="review-link" href="#">10 Review(s) | Add your review</a>
-							</div> -->
 							<div>
 								<h3 class="product-price">฿ <?= number_format($data['price'], );?> 
-								<!-- <del class="product-old-price">$990.00</del></h3> -->
-								<!-- <span class="product-available">In Stock</span> -->
 							</div>
 							<p><?=$data['com_detail'];?></p>
 
-							<!-- <div class="product-options">
-								<label>
-									Size
-									<select class="input-select">
-										<option value="0">X</option>
-									</select>
-								</label>
-								<label>
-									Color
-									<select class="input-select">
-										<option value="0">Red</option>
-									</select>
-								</label>
-							</div> -->
 
-						<form method="post" action="">
 							<div class="add-to-cart">
 								<div class="qty-label">
 									จำนวน
-									<div class="input-number">
-										<input class="text-center" type="number" value="1" minlength="5" name="qty">
-										<!-- <span class="qty-up">+</span>
-										<span class="qty-down">-</span> -->
-									</div>
+									<form method="post" action="">
+										<div class="input-number">
+											<input class="text-center" type="number" value="1" name="qty">
+											<span class="qty-up">+</span>
+											<span class="qty-down">-</span>
+										</div>
+									</form>
 								</div>
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>
-								<a href="checkout.php?id=<?=$data['id'];?>">เพิ่มใส่รถเข็น</button>
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> เพิ่มใส่รถเข็น</button>
 							</div>
-						</form>
-
-							<!-- <ul class="product-btns">
-								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-							</ul> -->
 
 							<ul class="product-links">
 								<li>หมวดหมู่ :</li>
@@ -321,13 +267,6 @@
 
 							<p><?=nl2br($data['detail']);?></p>
 
-							<!-- <ul class="product-links">
-								<li>Share:</li>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-							</ul> -->
 
 						</div>
 					</div>
@@ -338,9 +277,6 @@
 						<div id="product-tab">
 							<!-- product tab nav -->
 							<ul class="tab-nav">
-								<!-- <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-								<li><a data-toggle="tab" href="#tab2">Details</a></li>
-								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li> -->
 							</ul>
 							<!-- /product tab nav -->
 
@@ -408,11 +344,6 @@
 								<h3 class="product-name"><a href="#">product name goes here</a></h3>
 								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								<div class="product-rating">
-									<!-- <i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i> -->
 								</div>
 								<div class="product-btns">
 									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
@@ -440,11 +371,6 @@
 								<h3 class="product-name"><a href="#">product name goes here</a></h3>
 								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								<div class="product-rating">
-									<!-- <i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i> -->
 								</div>
 								<div class="product-btns">
 									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
@@ -493,8 +419,36 @@
 
 		
 
+<?php
 
+// ดึงข้อมูลสินค้าที่ต้องการเพิ่มลงในตะกร้า
+$product_id = $_POST['id'];
+$product_name = $_POST['name'];
+$product_price = $_POST['price'];
+$product_quantity = $_POST['qty'];
 
+// ตรวจสอบว่ามีสินค้านี้ในตะกร้าหรือไม่
+$items = $_SESSION['cart'];
+if (array_key_exists($product_id, $items)) {
+  // เพิ่มจำนวนสินค้าในตะกร้า
+$items[$product_id]['qty'] += $product_quantity;
+} else {
+  // เพิ่มสินค้าใหม่ลงในตะกร้า
+$items[$product_id] = [
+    'id' => $product_id,
+    'name' => $product_name,
+    'price' => $product_price,
+    'qty' => $product_quantity,
+];
+}
+
+// บันทึกข้อมูลตะกร้าสินค้าลงใน session
+$_SESSION['cart'] = $items;
+
+// เปลี่ยนเส้นทางไปยังหน้า cart.php
+header('Location: checkout copy.php');
+
+?>
 
 
 

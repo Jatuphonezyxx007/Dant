@@ -59,8 +59,8 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-right">
-						<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
 						<li><a href="#"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
+						<li><a href="./admin/src/html/index.php"><i class="fa fa-lock"></i> ADMIN</a></li>
 					</ul>
 				</div>
 			</div>
@@ -438,31 +438,10 @@
 								<div class="product">
 									<div class="product-img">
 									<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
-										<!-- <div class="product-label">
-											<span class="sale">-30%</span>
-											<span class="new">NEW</span>
-										</div> -->
 									</div>
 									<div class="product-body">
-										<!-- <p class="product-category">Category</p> -->
 										<h4 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h4>
 										<h5 class="product-price">฿ <?= number_format($data['price'], );?></h5>
-										<!-- <del class="product-old-price">$990.00</del>  old price -->
-										<!-- <div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div> -->
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 									</div>
 								</div>
 
