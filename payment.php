@@ -3,25 +3,20 @@ error_reporting(E_NOTICE);
 
 	@session_start();
 	include("connectdb.php");
-	$sql = "select * from products where id ='{$_GET['id']}' ";
+	$sql = "select * from product where p_id='{$_GET['id']}' ";
 	$rs = mysqli_query($conn, $sql) ;
 	$data = mysqli_fetch_array($rs);
 	$id = $_GET['id'] ;
 	
 	if(isset($_GET['id'])) {
-		$_SESSION['sid'][$id] = $data['id'];
+		$_SESSION['sid'][$id] = $data['p_id'];
 		$_SESSION['sname'][$id] = $data['name'];
 		$_SESSION['sprice'][$id] = $data['price'];
 		$_SESSION['sdetail'][$id] = $data['detail'];
 		$_SESSION['spicture'][$id] = $data['img'];
 		@$_SESSION['sitem'][$id]++;
 	}
-
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +67,7 @@ error_reporting(E_NOTICE);
 				<div class="container">
 					<ul class="header-links pull-right">
 						<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
-						<li><a href="sign_up.php"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
+						<li><a href="#"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
 					</ul>
 				</div>
 			</div>
@@ -87,34 +82,32 @@ error_reporting(E_NOTICE);
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="index.php" class="logo">
-									<img src="admin/src/assets/images/logos/dant.png" alt="icon" width="250px">
+								<a href="#" class="logo">
+									<img src="img/DANT.png" alt="icon" width="250px">
 								</a>
 							</div>
 						</div>
 						<!-- /LOGO -->
 
 						<!-- SEARCH BAR -->
-
-
 						<div class="col-md-6">
 							<div class="header-search">
-								<form method="post" action="store1.php">
-									<select class="input-select" name="select">
+								<form>
+									<select class="input-select">
 										<option value="0">ทั้งหมด</option>
 										<option value="1">คอมพิวเตอร์</option>
-										<option value="2">ซีพียู</option>
-										<option value="3">การ์ดจอ</option>
-										<option value="4">แรม</option>
-										<option value="6">พาวเวอร์ซัพพลาย</option>
-										<option value="7">เมาส์</option>
-										<option value="8">คีย์บอร์ด</option>
-										<option value="9">หูฟัง</option>
-										<option value="10">หน้าจอ</option>
-										<option value="11">โน๊ตบุ๊ค</option>
+										<option value="1">โน๊ตบุ๊ค</option>
+										<option value="1">เมาส์</option>
+										<option value="1">คีย์บอร์ด</option>
+										<option value="1">ซีพียู</option>
+										<option value="1">การ์ดจอ</option>
+										<option value="1">เมนบอร์ด</option>
+										<option value="1">แรม</option>
+										<option value="1">พาวเวอร์ซัพพลาย</option>
+										<option value="1">หูฟัง</option>
 									</select>
-									<input class="input" name="src" placeholder="ค้นหาสินค้าที่ต้องการ ..." autofocus>
-									<button class="search-btn" name="Submit">ค้นหา</button>
+									<input class="input" placeholder="Search here">
+									<button class="search-btn">Search</button>
 								</form>
 							</div>
 						</div>
@@ -141,7 +134,6 @@ error_reporting(E_NOTICE);
 									</a>
 								</div>
 								<!-- /Cart -->
-
 								<!-- Menu Toogle -->
 								<div class="menu-toggle">
 									<a href="#">
@@ -190,7 +182,7 @@ error_reporting(E_NOTICE);
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
-				<!-- <div class="row">
+				<div class="row">
 					<div class="col-md-12">
 						<h3 class="breadcrumb-header">Checkout</h3>
 						<ul class="breadcrumb-tree">
@@ -198,7 +190,7 @@ error_reporting(E_NOTICE);
 							<li class="active">Checkout</li>
 						</ul>
 					</div>
-				</div> -->
+				</div>
 				<!-- /row -->
 			</div>
 			<!-- /container -->
@@ -209,135 +201,126 @@ error_reporting(E_NOTICE);
 		<div class="section">
 			<!-- container -->
 			<div class="container">
-				<div class="section-title text-center">
-					<h3 class="title">รายการคำสั่งซื้อของฉัน</h3>
-				</div>
-
 				<!-- row -->
 				<div class="row">
+					<form method="post" action="">
 
-					<div class="col-md-1">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">ที่อยู่ในการจัดส่ง</h3><br><br>
+								<h5 class="sub-title">กรุณากรอกรายละเอียดด้านล่างเพื่อเสร็จสิ้นการสั่งซื้อสินค้า</h5>
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="fullname" placeholder="ชื่อ - นามสกุล">
+							</div>
+							<!-- <div class="form-group">
+								<input class="input" type="text" name="last-name" placeholder="Last Name">
+							</div> -->
+							<div class="form-group">
+								<input class="input" type="email" name="email" placeholder="อีเมล์">
+							</div>
+							<div class="form-group">
+								<textarea class="input" name="ads" placeholder="ที่อยู่"></textarea>
+								<!-- <input class="input" type="text" name="address" placeholder="Address"> -->
+							</div>
+							<!-- <div class="form-group">
+								<input class="input" type="text" name="city" placeholder="City">
+							</div> -->
+							<!-- <div class="form-group">
+								<input class="input" type="text" name="country" placeholder="Country">
+							</div> -->
+							<div class="form-group">
+								<input class="input" type="text" name="zip-code" placeholder="รหัสไปรษณีย์">
+							</div>
+							<div class="form-group">
+								<input class="input" type="tel" name="tel" placeholder="เบอร์โทร" maxlength="10">
+							</div>
+						</div>
+						<!-- /Billing Details -->
+
+
 					</div>
 
 
-					<table width="100%" class="table">
-					<div  class="text-center">
-						<tr>
-							<th width="8%">รายการที่</th>
-							<!-- <th width="19%">สินค้า</th> -->
-							<th width="39%" class="pull-center">ชื่อสินค้า</th>
-							<th width="14%" class="pull-center">ราคา/ชิ้น</th>
-							<th width="16%" class="pull-center">จำนวน (ชิ้น)</th>
-							<th width="14%">รวม</th>
-							<th width="9%">&nbsp;</th>
-						</tr>
-					</div>
 <?php
 if(!empty($_SESSION['sid'])) {
-	foreach($_SESSION['sid'] as $pid) {
-		@$i++;
-		$sum[$pid] = $_SESSION['sprice'][$pid] * $_SESSION['sitem'][$pid] ;
-		@$total += $sum[$pid] ;
+foreach($_SESSION['sid'] as $pid) {
+@$i++;
+$sum[$pid] = $_SESSION['sprice'][$pid] * $_SESSION['sitem'][$pid] ;
+@$total += $sum[$pid] ;
 ?>
-	<tr>
-		<td><div class="text-center"> <?=$i;?></div></td>
-		<td><?=$_SESSION['sname'][$pid];?></td>
-		<td><?=number_format($_SESSION['sprice'][$pid],0);?></td>
-		<td> <?=$_SESSION['sitem'][$pid];?></td>
-		<td><?=number_format($sum[$pid],0);?></td>
-		<td><a href="clear_product.php?id=<?=$pid;?>" class="btn btn-danger">ลบ</a></td>
-	</tr>
-	<?php } // end foreach ?>
-	<tr>
-		<td colspan="5" align="right"><strong>รวมทั้งสิ้น</strong> &nbsp; </td>
-		<td><strong><?=number_format($total,0);?></strong></td>
-		<td><strong>บาท</strong></td>
-	</tr>
-
-	
-<?php 
-} else {
-?>
-	<tr>
-		<td colspan="7" height="50" align="center">ไม่มีสินค้าในตะกร้า</td>
-	</tr>
-<?php } // end if ?>
-</table>
-
-
 
 
 					<!-- Order Details -->
-					<!-- <div class="col-md-10 order-details">
+					<div class="col-md-5 order-details">
 						<div class="section-title text-center">
-							<h3 class="title">รายการคำสั่งซื้อของฉัน</h3>
+							<h3 class="title">สินค้าของคุณ</h3>
 						</div>
 						<div class="order-summary">
 							<div class="order-col">
 								<div><strong>รายการ</strong></div>
 								<div><strong>รวม</strong></div>
 							</div>
-
-							<?php
-							if(!empty($_SESSION['sid'])) {
-								foreach($_SESSION['sid'] as $pid) {
-									@$i++;
-									$sum[$pid] = $_SESSION['sprice'][$pid] * $_SESSION['sitem'][$pid] ;
-									@$total += $sum[$pid] ;
-									?>
-
 							<div class="order-products">
-								
 								<div class="order-col">
-									<div><?=$_SESSION['sname'][$pid];?></div>
-									<div><?=number_format($_SESSION['sprice'][$pid],0);?></div>
+									<div><?=$_SESSION['sitem'][$pid];?>x <?=$_SESSION['sname'][$pid];?></div>
+									<div><?=number_format($sum[$pid],0);?></div>
 								</div>
 							</div>
-
-							<?php } // end foreach ?>
-
 							<div class="order-col">
 								<div>Shiping</div>
 								<div><strong>FREE</strong></div>
 							</div>
 							<div class="order-col">
 								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total"><?=number_format($sum[$pid],0);?></strong></div>
+								<div><strong class="order-total">$2940.00</strong></div>
 							</div>
 						</div>
-						<a href="#" class="primary-btn order-submit">Place order</a>
-					</div> -->
+							<div class="payment-method">
+								<div class="input-radio">
+									<input type="radio" name="payment" id="payment-1">
+									<label for="payment-1">
+										<span></span>
+										โอนเงินผ่านธนาคาร
+									</label>
+									<div class="caption">
+										<p>ชื่อบัญชี : </p>
+										<p>ธนาคาร :</p>
+										<p>สาขา :</p>
+										<p>เลขบัญชี :</p><br>
+										<!-- <div class="mb-3"> -->
+										<label for="img_product" class="form-label">แจ้งชำระเงิน</label>
+										<input class="form-control" name="slip" type="file"><br>
+										<!-- <input class="form-control" name="no_order" placeholder="เลขรายการสั่งซื้อ"><br> -->
+									</div>
+								</div>
+							</div>
+							<div class="input-radio">
+								<input type="radio" name="payment" id="payment-2">
+								<label for="payment-2">
+									<span></span>
+									เก็บเงินปลายทาง
+								</label>
+								<div class="caption">
+									<p>ลูกค้าจะชำระเงินก็ต่อเมื่อพัสดุที่สั่งไปจัดส่งถึงมือลูกค้าแล้ว !</p>
+								</div>
+							</div>
+						<a href="#" class="primary-btn order-submit">ยืนยันการชำระสินค้า</a>
+					</div>
 					<!-- /Order Details -->
+					</form>
+
+					<?php } // end foreach ?>
+					<?php 
+					} else {
+						?>
+<?php } // end if ?>
 
 
 
-<?php 
-} else {
-	?>
-	<div class="section-title text-center">
-		<h3 class="sub-title">ไม่มีสินค้าใด ๆ ในรถเข็น</h3>
-	</div>
-
-	<?php } // end if ?>
-	</blockquote>
-	
-
-	<a href="store1.php" class="btn btn-info">เลือกสินค้าต่อ</a> 
-	<a href="clear.php" class="btn btn-warning">ลบทั้งหมด</a> 
-	<a href="record.php" class="btn btn-danger">ชำระเงิน</a>
-
-
-<?php
-// ดึงข้อมูลการซื้อจากหน้า checkout.php
-$product_name = $_POST['product_name'];
-$product_quantity = $_POST['product_quantity'];
-$product_price = $_POST['product_price'];
-$total_price = $product_quantity * $product_price;
-
-// ส่งข้อมูลการซื้อไปยังหน้า detail.php
-header("Location: detail.php?product_name=$product_name&product_quantity=$product_quantity&product_price=$product_price&total_price=$total_price");
-
-?>
 				</div>
 				<!-- /row -->
 			</div>

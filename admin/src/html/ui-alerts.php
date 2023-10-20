@@ -1,3 +1,18 @@
+<?php
+@session_start();
+if(empty($_SESSION['aid'])){
+	echo"Access Denied !!!";
+	exit;
+	
+	
+	}
+	// echo $_SESSION['aname'];
+
+
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -47,22 +62,10 @@
           <ul id="sidebarnav">
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">หน้าหลัก</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./index2.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-                <span class="hide-menu">ภาพรวม</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">สินค้า</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-card.php" aria-expanded="false">
+              <a class="sidebar-link" href="./index2.php" aria-expanded="false">
                 <span>
                   <i class="ti ti-list-check"></i>
                 </span>
@@ -85,22 +88,6 @@
                 <span class="hide-menu">คำสั่งซื้อ</span>
               </a>
             </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-buttons.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-article"></i>
-                </span>
-                <span class="hide-menu">Buttons</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-typography.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-typography"></i>
-                </span>
-                <span class="hide-menu">Typography</span>
-              </a>
-            </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <!-- <span class="hide-menu">AUTH</span> -->
@@ -111,7 +98,6 @@
       </div>
       <!-- End Sidebar scroll-->
     </aside>
-    <!--  Sidebar End -->
     <!--  Sidebar End -->
     <!--  Main wrapper -->
     <div class="body-wrapper">
@@ -136,23 +122,16 @@
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                  <img src="../assets/images/profile/admin-1.png" alt="" width="40" height="35" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-user fs-6"></i>
-                      <p class="mb-0 fs-3">My Profile</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-mail fs-6"></i>
-                      <p class="mb-0 fs-3">My Account</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">My Task</p>
-                    </a>
-                    <a href="./authentication-login.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <div class="text-center">
+                  <?php
+                  echo $_SESSION['aname'];
+                  ?>
+                  </div>
+                    <a href="./logout.php" class="btn btn-outline-danger mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>
               </li>
@@ -168,30 +147,67 @@
               <h5 class="card-title fw-semibold mb-4">รายการคำสั่งซื้อ</h5>
               <div class="card mb-0">
                 <div class="card-body p-4">
-                  <div class="alert alert-primary" role="alert">
+
+
+                <!--border="1" cellspacing="1" cellpadding="1"-->
+
+                <table class="table table-striped table-sm-gap" width="100%">
+                  <tr>
+                    <td width="15%" class="text-center">&nbsp;</td>
+                    <td width="20%" class="text-center">เลขที่ใบสั่งซื้อ</td>
+                    <td width="20%" class="text-center">วันที่</td>
+                    <td width="20%" class="text-center">ราคารวม</td>
+                    <td width="20%" class="text-center">ลูกค้า</td>
+                    <th width="5%">&nbsp;</th>
+                  </tr>
+                  
+                  <?php
+                  include("connectdb.php");
+                  $sql = "select  *  from  `orders`  order by oid  desc ";
+                  $rs = mysqli_query($conn, $sql) ;
+                  while ($data = mysqli_fetch_array($rs, MYSQLI_BOTH)) {
+                  ?>
+                  
+                  <tr>
+                  <td class="text-center"><a href="detail.php?a=<?=$data['oid'];?>">รายละเอียด</a></td>
+                  <td class="text-center"><?=$data['oid'];?></td>
+                  <td class="text-center"><?=$data['odate'];?></td>
+                  <td class="text-center"><?=number_format($data['ototal'],0);?> บาท</td>
+                  <td class="text-center">---</td>
+                  <td><a href="clear_product.php?id=<?=$pid;?>" class="btn btn-danger">ลบ</a></td>
+                </tr>
+                
+                <?php  }  ?>
+
+
+
+                  <!-- <div class="alert alert-primary" role="alert">
                     A simple primary alert—check it out!
-                  </div>
-                  <div class="alert alert-secondary" role="alert">
+                  </div> -->
+                  <!-- <div class="alert alert-secondary" role="alert">
                     A simple secondary alert—check it out!
-                  </div>
-                  <div class="alert alert-success" role="alert">
-                    A simple success alert—check it out!
-                  </div>
-                  <div class="alert alert-danger" role="alert">
+                  </div> -->
+
+                  <!-- <div class="alert alert-info" role="alert"> -->
+                    <!-- <a href="view_order_detail.php?a=<?=$data['oid'];?>">ดูรายละเอียด</a>
+                    <p><?=$data['oid'];?></p> -->
+                  <!-- </div> -->
+
+                  <!-- <div class="alert alert-danger" role="alert">
                     A simple danger alert—check it out!
-                  </div>
-                  <div class="alert alert-warning" role="alert">
+                  </div> -->
+                  <!-- <div class="alert alert-warning" role="alert">
                     A simple warning alert—check it out!
-                  </div>
-                  <div class="alert alert-info" role="alert">
+                  </div> -->
+                  <!-- <div class="alert alert-info" role="alert">
                     A simple info alert—check it out!
-                  </div>
-                  <div class="alert alert-light" role="alert">
+                  </div> -->
+                  <!-- <div class="alert alert-light" role="alert">
                     A simple light alert—check it out!
-                  </div>
-                  <div class="alert alert-dark" role="alert">
+                  </div> -->
+                  <!-- <div class="alert alert-dark" role="alert">
                     A simple dark alert—check it out!
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

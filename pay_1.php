@@ -1,3 +1,26 @@
+<?php
+error_reporting(E_NOTICE);
+
+	@session_start();
+	include("connectdb.php");
+	$sql = "select * from product where p_id='{$_GET['id']}' ";
+	$rs = mysqli_query($conn, $sql) ;
+	$data = mysqli_fetch_array($rs);
+	$id = $_GET['id'] ;
+	
+	
+	if(isset($_GET['id'])) {
+		$_SESSION['sid'][$id] = $data['p_id'];
+		$_SESSION['sname'][$id] = $data['p_name'];
+		$_SESSION['sprice'][$id] = $data['p_price'];
+		$_SESSION['sdetail'][$id] = $data['p_detail'];
+		$_SESSION['spicture'][$id] = $data['p_picture'];
+		@$_SESSION['sitem'][$id]++;
+	}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -33,7 +56,6 @@
  		<!-- Custom stlylesheet -->
  		<link type="text/css" rel="stylesheet" href="css/style.css"/>
 
-
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -43,8 +65,6 @@
 
     </head>
 	<body>
-		<!-- HEADER -->
-		<header>
 			<!-- TOP HEADER -->
 			<div id="top-header">
 				<div class="container">
@@ -65,7 +85,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="index.php" class="logo">
+								<a href="#" class="logo">
 									<img src="img/DANT.png" alt="icon" width="250px">
 								</a>
 							</div>
@@ -89,7 +109,7 @@
 										<option value="1">พาวเวอร์ซัพพลาย</option>
 										<option value="1">หูฟัง</option>
 									</select>
-									<input class="input" placeholder="ค้นหาสินค้าที่ต้องการ ...">
+									<input class="input" placeholder="Search here">
 									<button class="search-btn">Search</button>
 								</form>
 							</div>
@@ -180,13 +200,12 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="index.php">หน้าหลัก</a></li>
-						<li><a href="#">ยอดนิยม</a></li>
-						<li class="active"><a href="#">คอมพิวเตอร์</a></li>
-						<li><a href="#">โน๊ตบุ๊ค</a></li>
-						<li><a href="#">เมาส์</a></li>
-						<li><a href="#">คีย์บอร์ด</a></li>
-						<li><a href="#">อุปกรณ์เสริม</a></li>
+						<li class="active"><a href="index.php">หน้าหลัก</a></li>
+						<li><a href="store_pop.php">ยอดนิยม</a></li>
+						<li><a href="store_com.php">คอมพิวเตอร์</a></li>
+						<li><a href="store_laptop.php">โน๊ตบุ๊ค</a></li>
+						<li><a href="store_mouse.php">เมาส์</a></li>
+						<li><a href="store_keyboard.php">คีย์บอร์ด</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -196,8 +215,6 @@
 		</nav>
 		<!-- /NAVIGATION -->
 
-
-
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
 			<!-- container -->
@@ -205,11 +222,10 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
+						<h3 class="breadcrumb-header">Checkout</h3>
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
-							<li><a href="#">All Categories</a></li>
-							<li><a href="#">0</a></li>
-							<!-- <li class="active">Headphones (227,490 Results)</li> -->
+							<li class="active">Checkout</li>
 						</ul>
 					</div>
 				</div>
@@ -225,280 +241,121 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-					<!-- ASIDE -->
-					<div id="aside" class="col-md-3">
-						<!-- aside Widget -->
-						<!-- <div class="aside">
-							<h3 class="aside-title">Categories</h3>
-							<div class="checkbox-filter">
+					<form method="post" action="">
 
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-1">
-									<label for="category-1">
-										<span></span>
-										Laptops
-										<small>(120)</small>
-									</label>
-								</div>
 
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-2">
-									<label for="category-2">
-										<span></span>
-										Smartphones
-										<small>(740)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-3">
-									<label for="category-3">
-										<span></span>
-										Cameras
-										<small>(1450)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-4">
-									<label for="category-4">
-										<span></span>
-										Accessories
-										<small>(578)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-5">
-									<label for="category-5">
-										<span></span>
-										Laptops
-										<small>(120)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-6">
-									<label for="category-6">
-										<span></span>
-										Smartphones
-										<small>(740)</small>
-									</label>
-								</div>
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">ที่อยู่ในการจัดส่ง</h3><br><br>
+								<h5 class="sub-title">กรุณากรอกรายละเอียดด้านล่างเพื่อเสร็จสิ้นการสั่งซื้อสินค้า</h5>
 							</div>
-						</div> -->
-						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
-						<!-- <div class="aside">
-							<h3 class="aside-title">Price</h3>
-							<div class="price-filter">
-								<div id="price-slider"></div>
-								<div class="input-number price-min">
-									<input id="price-min" type="number">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
-								</div>
-								<span>-</span>
-								<div class="input-number price-max">
-									<input id="price-max" type="number">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
-								</div>
+							<div class="form-group">
+								<input class="input" type="text" name="fullname" placeholder="ชื่อ - นามสกุล">
 							</div>
-						</div> -->
-						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
-						<!-- <div class="aside">
-							<h3 class="aside-title">Brand</h3>
-							<div class="checkbox-filter">
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-1">
-									<label for="brand-1">
-										<span></span>
-										SAMSUNG
-										<small>(578)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-2">
-									<label for="brand-2">
-										<span></span>
-										LG
-										<small>(125)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-3">
-									<label for="brand-3">
-										<span></span>
-										SONY
-										<small>(755)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-4">
-									<label for="brand-4">
-										<span></span>
-										SAMSUNG
-										<small>(578)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-5">
-									<label for="brand-5">
-										<span></span>
-										LG
-										<small>(125)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-6">
-									<label for="brand-6">
-										<span></span>
-										SONY
-										<small>(755)</small>
-									</label>
-								</div>
+							<!-- <div class="form-group">
+								<input class="input" type="text" name="last-name" placeholder="Last Name">
+							</div> -->
+							<div class="form-group">
+								<input class="input" type="email" name="email" placeholder="อีเมล์">
 							</div>
-						</div> -->
-						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
-						<div class="aside">
-							<h3 class="aside-title">ยอดนิยม</h3>
-
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product01.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Category</p>
-									<h3 class="product-name"><a href="#">product name goes here</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								</div>
+							<div class="form-group">
+								<textarea class="input" name="ads" placeholder="ที่อยู่"></textarea>
+								<!-- <input class="input" type="text" name="address" placeholder="Address"> -->
 							</div>
-
-
-
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product02.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Category</p>
-									<h3 class="product-name"><a href="#">product name goes here</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								</div>
+							<!-- <div class="form-group">
+								<input class="input" type="text" name="city" placeholder="City">
+							</div> -->
+							<!-- <div class="form-group">
+								<input class="input" type="text" name="country" placeholder="Country">
+							</div> -->
+							<div class="form-group">
+								<input class="input" type="text" name="zip-code" placeholder="รหัสไปรษณีย์">
 							</div>
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product03.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Category</p>
-									<h3 class="product-name"><a href="#">product name goes here</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								</div>
+							<div class="form-group">
+								<input class="input" type="tel" name="tel" placeholder="เบอร์โทร" maxlength="10">
 							</div>
 						</div>
-						<!-- /aside Widget -->
+						<!-- /Billing Details -->
+
+
 					</div>
-					<!-- /ASIDE -->
 
-					<!-- STORE -->
-					<div id="store" class="col-md-9">
-						<!-- store top filter -->
-						<!-- <div class="store-filter clearfix">
-							<div class="store-sort">
-								<label>
-									Sort By:
-									<select class="input-select">
-										<option value="0">Popular</option>
-										<option value="1">Position</option>
-									</select>
-								</label>
+					<?php
+if(!empty($_SESSION['sid'])) {
+	foreach($_SESSION['sid'] as $pid) {
+		@$i++;
+		$sum[$pid] = $_SESSION['sprice'][$pid] * $_SESSION['sitem'][$pid] ;
+		@$total += $sum[$pid] ;
+?>
 
-								<label>
-									Show:
-									<select class="input-select">
-										<option value="0">20</option>
-										<option value="1">50</option>
-									</select>
-								</label>
+					<!-- Order Details -->
+					<div class="col-md-5 order-details">
+						<div class="section-title text-center">
+							<h3 class="title">สินค้าของคุณ</h3>
+						</div>
+						<div class="order-summary">
+							<div class="order-col">
+								<div><strong>รายการ</strong></div>
+								<div><strong>รวม</strong></div>
 							</div>
-							<ul class="store-grid">
-								<li class="active"><i class="fa fa-th"></i></li>
-								<li><a href="#"><i class="fa fa-th-list"></i></a></li>
-							</ul>
-						</div> -->
-						<!-- /store top filter -->
-
-						<!-- store products -->
-					<div class="row">
-						<?php
-                                include("connectdb.php");
-                                $sql = "SELECT * FROM `products` WHERE (`name` LIKE '%{$search}%' OR `detail` LIKE '%{$search}%')";
-                                $rs = mysqli_query($conn, $sql);
-                                while ($data = mysqli_fetch_array($rs)){
-                                    ?>  
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-									<img src='imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
-										<!-- <div class="product-label">
-											<span class="sale">-30%</span>
-											<span class="new">NEW</span>
-										</div> -->
-									</div>
-									<div class="product-body">
-											<p class="product-category">Category</p>
-											<h3 class="product-name"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
-											<h4 class="product-price"><?= number_format($data['price'], );?></h4>
-											<!-- <del class="product-old-price">$990.00</del>  old price -->
-										<div class="product-rating">
-											<!-- <i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i> -->
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+							<div class="order-products">
+								<div class="order-col">
+									<div><?=$_SESSION['sname'][$pid];?></div>
+									<div><?=number_format($sum[$pid],0);?></div>
+								</div>
+								<!-- <div class="order-col">
+									<div>2x Product Name Goes Here</div>
+									<div>$980.00</div>
+								</div> -->
+							</div>
+							<div class="order-col">
+								<div>Shiping</div>
+								<div><strong>FREE</strong></div>
+							</div>
+							<div class="order-col">
+								<div><strong>TOTAL</strong></div>
+								<div><strong class="order-total"><?=number_format($total,0);?></strong></div>
+							</div>
+						</div>
+							<div class="payment-method">
+								<div class="input-radio">
+									<input type="radio" name="payment" id="payment-1">
+									<label for="payment-1">
+										<span></span>
+										โอนเงินผ่านธนาคาร
+									</label>
+									<div class="caption">
+										<p>ชื่อบัญชี : </p>
+										<p>ธนาคาร :</p>
+										<p>สาขา :</p>
+										<p>เลขบัญชี :</p><br>
+										<!-- <div class="mb-3"> -->
+										<label for="img_product" class="form-label">แจ้งชำระเงิน</label>
+										<input class="form-control" name="slip" type="file"><br>
+										<!-- <input class="form-control" name="no_order" placeholder="เลขรายการสั่งซื้อ"><br> -->
 									</div>
 								</div>
-
-								<div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
 							</div>
-							<?php
-						}
-						?>
+							<div class="input-radio">
+								<input type="radio" name="payment" id="payment-2">
+								<label for="payment-2">
+									<span></span>
+									เก็บเงินปลายทาง
+								</label>
+								<div class="caption">
+									<p>ลูกค้าจะชำระเงินก็ต่อเมื่อพัสดุที่สั่งไปจัดส่งถึงมือลูกค้าแล้ว !</p>
+								</div>
+							</div>
+						<a href="#" class="primary-btn order-submit">ยืนยันการชำระสินค้า</a>
 					</div>
-					?>
-				<!-- /store products -->
+					<!-- /Order Details -->
+					</form>
+					<?php 
+				}
+			 } // end foreach ?>
 
-						<!-- store bottom filter -->
-						<!-- <div class="store-filter clearfix">
-							<span class="store-qty">Showing 20-100 products</span>
-							<ul class="store-pagination">
-								<li class="active">1</li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-							</ul>
-						</div> -->
-						<!-- /store bottom filter -->
-					</div>
-					<!-- /STORE -->
 				</div>
 				<!-- /row -->
 			</div>

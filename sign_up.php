@@ -116,44 +116,10 @@
 
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a class="dropdown-toggle" href="checkout.php">
 										<i class="fa fa-shopping-cart"></i>
 										<span>รถเข็น</span>
-										<div class="qty">3</div>
 									</a>
-									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product01.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-										</div>
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
-										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-										</div>
-									</div>
 								</div>
 								<!-- /Cart -->
 
@@ -185,13 +151,12 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="index.html">หน้าหลัก</a></li>
-						<li><a href="#">ยอดนิยม</a></li>
-						<li><a href="#">คอมพิวเตอร์</a></li>
-						<li><a href="#">โน๊ตบุ๊ค</a></li>
-						<li><a href="#">เมาส์</a></li>
-						<li><a href="#">คีย์บอร์ด</a></li>
-						<li><a href="#">อุปกรณ์เสริม</a></li>
+						<li class="active"><a href="index.php">หน้าหลัก</a></li>
+						<li><a href="store_pop.php">ยอดนิยม</a></li>
+						<li><a href="store_com.php">คอมพิวเตอร์</a></li>
+						<li><a href="store_laptop.php">โน๊ตบุ๊ค</a></li>
+						<li><a href="store_mouse.php">เมาส์</a></li>
+						<li><a href="store_keyboard.php">คีย์บอร์ด</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -250,9 +215,19 @@
 						<?php
 						if(isset($_POST['submit'])){
 							include("connectdb.php");
-							$sql = "INSERT INTO `member` (`mem_id`, `mem_name`, `mem_email`, `mem_pwd`, `mem_phone`) VALUES (Null,'{$_POST['c_name']}','{$_POST['c_email']}', 'MD5({$_POST['mem_pwd']})', '{$_POST['c_tel']}');";
+
+							// เข้ารหัสรหัสผ่านด้วยฟังก์ชัน bcrypt
+							$mem_pwd = password_hash($_POST['mem_pwd'], PASSWORD_DEFAULT);
+
+							$sql = "INSERT INTO `member` (`mem_id`, `mem_name`, `mem_email`, `mem_pwd`, `mem_phone`) VALUES (Null,'{$_POST['c_name']}','{$_POST['c_email']}', '$mem_pwd', '{$_POST['c_tel']}');";
 							mysqli_query($conn, $sql) or die ("ไม่สามารถสมัครบัญชีได้");
 							
+							// $mem_pwd = md5($_POST['mem_pwd']);
+							// // แทนที่รหัสผ่านใน SQL ด้วย MD5
+							// $sql = str_replace("'{$_POST['mem_pwd']}',", "'{$mem_pwd}',", $sql);
+							// $rs = mysqli_query($conn, $sql);
+
+
 							echo"<script>";
 							echo"alert ('สมัครสมาชิกเรียบร้อยแล้ว');";
 							echo"window.location='index.php';";

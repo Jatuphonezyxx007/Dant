@@ -1,3 +1,20 @@
+<?php
+@session_start();
+if(empty($_SESSION['aid'])){
+	echo"Access Denied !!!";
+	exit;
+	
+	
+	}
+	// echo $_SESSION['aname'];
+
+
+
+?>
+
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -35,7 +52,7 @@
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.php" class="text-nowrap logo-img">
+          <a href="./index2.php" class="text-nowrap logo-img">
             <img src="../assets/images/logos/DANT1.png" width="200" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -50,7 +67,7 @@
               <span class="hide-menu">หน้าหลัก</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.php" aria-expanded="false">
+              <a class="sidebar-link" href="./index2.php" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -78,19 +95,19 @@
               </a>
             </li>
             <li class="sidebar-item">
+              <a class="sidebar-link" href="./ui-alerts.php" aria-expanded="false">
+                <span>
+                  <i class="ti ti-alert-circle"></i>
+                </span>
+                <span class="hide-menu">คำสั่งซื้อ</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
               <a class="sidebar-link" href="./ui-buttons.php" aria-expanded="false">
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
                 <span class="hide-menu">Buttons</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-alerts.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-alert-circle"></i>
-                </span>
-                <span class="hide-menu">Alerts</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -103,56 +120,9 @@
             </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">AUTH</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-login"></i>
-                </span>
-                <span class="hide-menu">Login</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user-plus"></i>
-                </span>
-                <span class="hide-menu">Register</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">EXTRA</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./icon-tabler.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-mood-happy"></i>
-                </span>
-                <span class="hide-menu">Icons</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./sample-page.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-aperture"></i>
-                </span>
-                <span class="hide-menu">Sample Page</span>
-              </a>
+              <!-- <span class="hide-menu">AUTH</span> -->
             </li>
           </ul>
-          <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
-            <div class="d-flex">
-              <div class="unlimited-access-title me-3">
-                <h6 class="fw-semibold fs-4 mb-6 text-dark w-85">Upgrade to pro</h6>
-                <a href="https://adminmart.com/product/modernize-bootstrap-5-admin-template/" target="_blank" class="btn btn-primary fs-2 fw-semibold lh-sm">Buy Pro</a>
-              </div>
-              <div class="unlimited-access-img">
-                <img src="../assets/images/backgrounds/rocket.png" alt="" class="img-fluid">
-              </div>
-            </div>
-          </div>
         </nav>
         <!-- End Sidebar navigation -->
       </div>
@@ -208,33 +178,60 @@
       </header>
       <!--  Header End -->
 
-
-      <?php
-                  include("connectdb.php");
-                  @$src = $_POST['src'];
-                  $sql = "SELECT * FROM `products` WHERE (`name` LIKE '%{$src}%' OR `detail` LIKE '%{$src}%')";
-                  $rs = mysqli_query($conn, $sql);
-                  
-                  while ($data = mysqli_fetch_array($rs)){
-                    ?>   
-
       <div class="container-fluid">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title fw-semibold mb-4">รายละเอียดสินค้า</h5>
-            <img src="../assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>" class="rounded mx-auto d-block" alt="..." height="300"><br><br>
-            <form action="" method="post">
-            <input class="form-control" type="text" name="name" value="<?=$data['name'];?>">
-            </form>
-            <p class="mb-0">This is a sample page </p>
+            <h3 class="card-title fw-semibold mb-4">รายละเอียดคำสั่งซื้อ</h3>
+
+            <h5>รายละเอียดใบสั่งซื้อ เลขที่ <?=$_GET['a'];?></h5><br>
+            <table width="100%" class="table table-striped table-sm-gap">
+              <tr>
+                <td width="5%" class="text-center">ที่</td>
+                <td width="5%" class="text-center">รหัสสินค้า</td>
+                <td width="40%" class="text-center">สินค้า</td>
+                <td width="10%" class="text-center">จำนวน</td>
+                <td width="20%" class="text-center">ราคา/ชิ้น</td>
+                <td width="20%" class="text-center">รวม (บาท)</td>
+              </tr>
+              
+              <?php
+              include("connectdb.php");
+              $sql = "SELECT  *  FROM  orders_detail
+              INNER JOIN products ON orders_detail.pid = products.id
+              WHERE orders_detail.oid = '".$_GET['a']."'  ";
+              $rs = mysqli_query($conn, $sql) ;
+              $i = 0;
+              while ($data = mysqli_fetch_array($rs, MYSQLI_BOTH)) {
+                $i++;
+                $sum = $data['price'] * $data['item'] ;
+                @$total += $sum;
+                ?>
+                <tr>
+                  <td><?=$i;?></td>
+                  <!-- <td><img src="images/<?=$data['p_picture'];?>" width="80"> <br> -->
+                  <td class="text-center"><?=@$data['id'];?></td>
+                  <td><?=$data['name'];?></td>
+                  <td class="text-center"><?=$data['item'];?></td>
+                  <td class="text-center"><?=number_format($data['price'],0);?></td>
+                  <td class="text-center"><?=number_format($sum,0);?></td>
+                </tr>
+                
+                <?php } ?>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td class="text-center">ราคารวม</td>
+                  <td class="text-center"><?=number_format($total,0);?></td>
+                </tr>
+              </table>
+
+            <!-- <p class="mb-0">This is a sample page </p> -->
           </div>
         </div>
       </div>
 
-      <?php
-        }
-        mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
-        ?> 
 
     </div>
   </div>

@@ -53,7 +53,7 @@
 				<div class="container">
 					<ul class="header-links pull-right">
 						<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
-						<li><a href="#"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
+						<li><a href="#"><i class="fa fa-user-o"></i> บัญชีของฉัน</a>
 						<li><a href="./admin/src/html/index.php"><i class="fa fa-lock"></i> ADMIN</a></li>
 
 					</ul>
@@ -97,10 +97,25 @@
 										<option value="11">โน๊ตบุ๊ค</option>
 									</select>
 									<input class="input" name="src" placeholder="ค้นหาสินค้าที่ต้องการ ..." autofocus>
-									<button class="search-btn" name="Submit">ค้นหา</button>
+									<button class="search-btn" type="submit" name="Submit">ค้นหา</button>
 								</form>
+
+								<?php
+								include("connectdb.php");
+								@$src = $_POST['src'];
+								$sql = "SELECT * FROM `products`  WHERE (`name` LIKE '%{$src}%' OR `detail` LIKE '%{$src}%') ORDER BY `products`.`type` ASC";
+
+								$rs = mysqli_query($conn, $sql);
+								while ($data = mysqli_fetch_array($rs)){
+                    ?>   
+
 							</div>
 						</div>
+						<?php
+						}
+						mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+						?> 
+
 
 
 
@@ -124,44 +139,9 @@
 									<a class="dropdown-toggle" href="checkout.php">
 										<i class="fa fa-shopping-cart"></i>
 										<span>รถเข็น</span>
-										<!-- <div class="qty"></div> -->
 									</a>
-									<!-- <div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product01.png" alt="">
-												</div> -->
-												<!-- <div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div> -->
-												<!-- <button class="delete"><i class="fa fa-close"></i></button> -->
-											<!-- </div> -->
-
-											<!-- <div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div> -->
-										<!-- </div> -->
-										<!-- <div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div> -->
-										<!-- <div class="cart-btns"> -->
-											<!-- <a href="#"></a> -->
-											<!-- <a href="#">ดูรถเข็นของฉัน  <i class="fa fa-arrow-circle-right"></i></a>
-										</div> -->
-									<!-- </div> -->
 								</div>
 								<!-- /Cart -->
-
 								<!-- Menu Toogle -->
 								<div class="menu-toggle">
 									<a href="#">
@@ -266,6 +246,8 @@
 				<!-- row -->
 				<div class="row">
 
+
+
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
@@ -290,25 +272,23 @@
 								<div id="tab1" class="tab-pane active">
 									<div class="products-slick" data-nav="#slick-nav-1">
 
-
-									
-
 										<!-- product -->
 										<div class="product">
 											<a href="product.html">
 												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
 												</div>
 											</a>
 											<div class="product-body">
 												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="product.html">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
 												<div class="product-btns">
 												</div>
 											</div>
 										</div>
 										<!-- /product -->
+
 
 										<!-- product -->
 										<div class="product">
@@ -388,6 +368,8 @@
 						</div>
 					</div>
 					<!-- Products tab & slick -->
+
+
 				</div>
 				<!-- /row -->
 			</div>
@@ -988,6 +970,8 @@
 								</ul>
 							</div>
 						</div>
+
+        
 
 						<!-- <div class="col-md-3 col-xs-6">
 							<div class="footer">

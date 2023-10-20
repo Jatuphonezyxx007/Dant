@@ -1,28 +1,3 @@
-<?php
-error_reporting(E_NOTICE);
-
-	@session_start();
-	include("connectdb.php");
-	$sql = "select * from products where id ='{$_GET['id']}' ";
-	$rs = mysqli_query($conn, $sql) ;
-	$data = mysqli_fetch_array($rs);
-	$id = $_GET['id'] ;
-	
-	if(isset($_GET['id'])) {
-		$_SESSION['sid'][$id] = $data['id'];
-		$_SESSION['sname'][$id] = $data['name'];
-		$_SESSION['sprice'][$id] = $data['price'];
-		$_SESSION['sdetail'][$id] = $data['detail'];
-		$_SESSION['spicture'][$id] = $data['img'];
-		@$_SESSION['sitem'][$id]++;
-	}
-
-
-?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -65,14 +40,22 @@ error_reporting(E_NOTICE);
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+		<script type="text/javascript">
+		$(function () {
+			$('#datetimepicker1').datetimepicker();
+		});
+		</script>
+
+
+
     </head>
 	<body>
 			<!-- TOP HEADER -->
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-right">
-						<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
-						<li><a href="sign_up.php"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
+						<li><a href="#"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
+						<li><a href="./admin/src/html/index.php"><i class="fa fa-lock"></i> ADMIN</a></li>
 					</ul>
 				</div>
 			</div>
@@ -87,38 +70,13 @@ error_reporting(E_NOTICE);
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="index.php" class="logo">
-									<img src="admin/src/assets/images/logos/dant.png" alt="icon" width="250px">
+								<a href="#" class="logo">
+									<img src="img/DANT.png" alt="icon" width="250px">
 								</a>
 							</div>
 						</div>
 						<!-- /LOGO -->
 
-						<!-- SEARCH BAR -->
-
-
-						<div class="col-md-6">
-							<div class="header-search">
-								<form method="post" action="store1.php">
-									<select class="input-select" name="select">
-										<option value="0">ทั้งหมด</option>
-										<option value="1">คอมพิวเตอร์</option>
-										<option value="2">ซีพียู</option>
-										<option value="3">การ์ดจอ</option>
-										<option value="4">แรม</option>
-										<option value="6">พาวเวอร์ซัพพลาย</option>
-										<option value="7">เมาส์</option>
-										<option value="8">คีย์บอร์ด</option>
-										<option value="9">หูฟัง</option>
-										<option value="10">หน้าจอ</option>
-										<option value="11">โน๊ตบุ๊ค</option>
-									</select>
-									<input class="input" name="src" placeholder="ค้นหาสินค้าที่ต้องการ ..." autofocus>
-									<button class="search-btn" name="Submit">ค้นหา</button>
-								</form>
-							</div>
-						</div>
-						<!-- /SEARCH BAR -->
 
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
@@ -170,7 +128,7 @@ error_reporting(E_NOTICE);
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="index.php">หน้าหลัก</a></li>
+						<li><a href="index.html">หน้าหลัก</a></li>
 						<li><a href="store_pop.php">ยอดนิยม</a></li>
 						<li><a href="store_com.php">คอมพิวเตอร์</a></li>
 						<li><a href="store_laptop.php">โน๊ตบุ๊ค</a></li>
@@ -190,7 +148,7 @@ error_reporting(E_NOTICE);
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
-				<!-- <div class="row">
+				<div class="row">
 					<div class="col-md-12">
 						<h3 class="breadcrumb-header">Checkout</h3>
 						<ul class="breadcrumb-tree">
@@ -198,7 +156,7 @@ error_reporting(E_NOTICE);
 							<li class="active">Checkout</li>
 						</ul>
 					</div>
-				</div> -->
+				</div>
 				<!-- /row -->
 			</div>
 			<!-- /container -->
@@ -209,135 +167,81 @@ error_reporting(E_NOTICE);
 		<div class="section">
 			<!-- container -->
 			<div class="container">
-				<div class="section-title text-center">
-					<h3 class="title">รายการคำสั่งซื้อของฉัน</h3>
-				</div>
-
 				<!-- row -->
 				<div class="row">
 
-					<div class="col-md-1">
+					<div class="col-md-3">
 					</div>
-
-
-					<table width="100%" class="table">
-					<div  class="text-center">
-						<tr>
-							<th width="8%">รายการที่</th>
-							<!-- <th width="19%">สินค้า</th> -->
-							<th width="39%" class="pull-center">ชื่อสินค้า</th>
-							<th width="14%" class="pull-center">ราคา/ชิ้น</th>
-							<th width="16%" class="pull-center">จำนวน (ชิ้น)</th>
-							<th width="14%">รวม</th>
-							<th width="9%">&nbsp;</th>
-						</tr>
-					</div>
-<?php
-if(!empty($_SESSION['sid'])) {
-	foreach($_SESSION['sid'] as $pid) {
-		@$i++;
-		$sum[$pid] = $_SESSION['sprice'][$pid] * $_SESSION['sitem'][$pid] ;
-		@$total += $sum[$pid] ;
-?>
-	<tr>
-		<td><div class="text-center"> <?=$i;?></div></td>
-		<td><?=$_SESSION['sname'][$pid];?></td>
-		<td><?=number_format($_SESSION['sprice'][$pid],0);?></td>
-		<td> <?=$_SESSION['sitem'][$pid];?></td>
-		<td><?=number_format($sum[$pid],0);?></td>
-		<td><a href="clear_product.php?id=<?=$pid;?>" class="btn btn-danger">ลบ</a></td>
-	</tr>
-	<?php } // end foreach ?>
-	<tr>
-		<td colspan="5" align="right"><strong>รวมทั้งสิ้น</strong> &nbsp; </td>
-		<td><strong><?=number_format($total,0);?></strong></td>
-		<td><strong>บาท</strong></td>
-	</tr>
-
-	
-<?php 
-} else {
-?>
-	<tr>
-		<td colspan="7" height="50" align="center">ไม่มีสินค้าในตะกร้า</td>
-	</tr>
-<?php } // end if ?>
-</table>
-
-
-
 
 					<!-- Order Details -->
-					<!-- <div class="col-md-10 order-details">
+					<div class="col-md-5 order-details">
 						<div class="section-title text-center">
-							<h3 class="title">รายการคำสั่งซื้อของฉัน</h3>
+							<h3 class="title">สมัครบัญชี</h3> <br><br>
+							<h6 class="sub-title">ยินดีต้อนรับลูกค้าทุกท่านเข้าสู่ครอบครัวของเรา Dant</h6>
 						</div>
-						<div class="order-summary">
-							<div class="order-col">
-								<div><strong>รายการ</strong></div>
-								<div><strong>รวม</strong></div>
-							</div>
+						<form method="post" action="" enctype="multipart/form-data">
+							<input type="text" class="form-control" name="c_name" placeholder="ชื่อ - นามสกุล" autofocus><br>
+							<input type="tel" class="form-control"name="c_tel"placeholder="เบอร์โทร" maxlength="10"><br>
+							<input type="email" class="form-control" name="c_email" placeholder="อีเมล์"><br>
+							<input type="password" class="form-control"name="c_pwd"placeholder="รหัสผ่าน"><br>
 
-							<?php
-							if(!empty($_SESSION['sid'])) {
-								foreach($_SESSION['sid'] as $pid) {
-									@$i++;
-									$sum[$pid] = $_SESSION['sprice'][$pid] * $_SESSION['sitem'][$pid] ;
-									@$total += $sum[$pid] ;
-									?>
+							<button class="primary-btn order-submit"name="submit">สมัครสมาชิก</button>
+						<!-- <a href="#" class="primary-btn order-submit" name="submit">สมัครสมาชิก</a> -->
+						</form>
 
-							<div class="order-products">
-								
-								<div class="order-col">
-									<div><?=$_SESSION['sname'][$pid];?></div>
-									<div><?=number_format($_SESSION['sprice'][$pid],0);?></div>
-								</div>
-							</div>
+						<?php
+						if(isset($_POST['submit'])){
+							include("connectdb.php");
 
-							<?php } // end foreach ?>
+							// เข้ารหัสรหัสผ่านด้วยฟังก์ชัน bcrypt
+							$mem_pwd = password_hash($_POST['mem_pwd'], PASSWORD_DEFAULT);
 
-							<div class="order-col">
-								<div>Shiping</div>
-								<div><strong>FREE</strong></div>
-							</div>
-							<div class="order-col">
-								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total"><?=number_format($sum[$pid],0);?></strong></div>
-							</div>
-						</div>
-						<a href="#" class="primary-btn order-submit">Place order</a>
-					</div> -->
-					<!-- /Order Details -->
+							$sql = "INSERT INTO `member` (`mem_id`, `mem_name`, `mem_email`, `mem_pwd`, `mem_phone`) VALUES (Null,'{$_POST['c_name']}','{$_POST['c_email']}', '$mem_pwd', '{$_POST['c_tel']}');";
+							mysqli_query($conn, $sql) or die ("ไม่สามารถสมัครบัญชีได้");
+							
+							// $mem_pwd = md5($_POST['mem_pwd']);
+							// // แทนที่รหัสผ่านใน SQL ด้วย MD5
+							// $sql = str_replace("'{$_POST['mem_pwd']}',", "'{$mem_pwd}',", $sql);
+							// $rs = mysqli_query($conn, $sql);
 
 
+							echo"<script>";
+							echo"alert ('สมัครสมาชิกเรียบร้อยแล้ว');";
+							echo"window.location='index.php';";
+							echo"</script>";
+						}
+						?>
 
-<?php 
-} else {
-	?>
-	<div class="section-title text-center">
-		<h3 class="sub-title">ไม่มีสินค้าใด ๆ ในรถเข็น</h3>
-	</div>
+					</div>
 
-	<?php } // end if ?>
-	</blockquote>
 	
 
-	<a href="store1.php" class="btn btn-info">เลือกสินค้าต่อ</a> 
-	<a href="clear.php" class="btn btn-warning">ลบทั้งหมด</a> 
-	<a href="record.php" class="btn btn-danger">ชำระเงิน</a>
+<!-- <script>
+function checkPassword() {
+	 // รับค่ารหัสผ่านจาก input ทั้งสองช่อง
+	const password = document.querySelector("input[name='c_pwd']").value;
+	const confirmPassword = document.querySelector("input[name='con_pwd']").value;
+	// เปรียบเทียบค่าทั้งสองช่อง
+	if (password === confirmPassword) {
+		// รหัสผ่านตรงกัน
+		return true;
+	} else {
+		// รหัสผ่านไม่ตรงกัน
+		return false;
+	}
+}
+// เพิ่ม event listener ให้กับ input type="submit"
+document.querySelector("input[type='submit']").addEventListener("click", function() {
+	// ตรวจสอบว่ารหัสผ่านตรงกันหรือไม่
+	if (!checkPassword()) {
+		// รหัสผ่านไม่ตรงกัน แสดงข้อความแจ้งเตือน
+		alert("รหัสผ่านไม่ตรงกัน");
+		return false;
+    }
+});
+</script> -->
 
-
-<?php
-// ดึงข้อมูลการซื้อจากหน้า checkout.php
-$product_name = $_POST['product_name'];
-$product_quantity = $_POST['product_quantity'];
-$product_price = $_POST['product_price'];
-$total_price = $product_quantity * $product_price;
-
-// ส่งข้อมูลการซื้อไปยังหน้า detail.php
-header("Location: detail.php?product_name=$product_name&product_quantity=$product_quantity&product_price=$product_price&total_price=$total_price");
-
-?>
+					<!-- /Order Details -->
 				</div>
 				<!-- /row -->
 			</div>
@@ -432,6 +336,10 @@ header("Location: detail.php?product_name=$product_name&product_quantity=$produc
 			<!-- /top footer -->
 		</footer>
 		<!-- /FOOTER -->
+
+
+
+
 
 		<!-- jQuery Plugins -->
 		<script src="js/jquery.min.js"></script>
