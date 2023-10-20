@@ -116,41 +116,7 @@
 									<a class="dropdown-toggle" href="checkout.php">
 										<i class="fa fa-shopping-cart"></i>
 										<span>รถเข็น</span>
-										<!-- <div class="qty"></div> -->
 									</a>
-									<!-- <div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product01.png" alt="">
-												</div> -->
-												<!-- <div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div> -->
-												<!-- <button class="delete"><i class="fa fa-close"></i></button> -->
-											<!-- </div> -->
-
-											<!-- <div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div> -->
-										<!-- </div> -->
-										<!-- <div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div> -->
-										<!-- <div class="cart-btns"> -->
-											<!-- <a href="#"></a> -->
-											<!-- <a href="#">ดูรถเข็นของฉัน  <i class="fa fa-arrow-circle-right"></i></a>
-										</div> -->
-									<!-- </div> -->
 								</div>
 								<!-- /Cart -->
 
@@ -208,10 +174,13 @@
 				<?php
 				include("connectdb.php");
 
+				// $sql = "SELECT p.*, t.t_name as type_name FROM products p INNER JOIN type t ON p.type = t.t_id WHERE '{$_GET['id']}'";
 				$sql = "SELECT * FROM `products` WHERE `id` = '{$_GET['id']}'";
 				$rs = mysqli_query($conn, $sql,);
 				$data = mysqli_fetch_array($rs); 
 				?>
+
+<!-- "SELECT p.*, t.t_name as type_name FROM products p INNER JOIN type t ON p.type = t.t_id WHERE '{$_GET['id']}'" -->
 
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
@@ -262,73 +231,28 @@
 					<div class="col-md-5">
 						<div class="product-details">
 							<h2 class="product-name"><?=$data['name'];?></h2>
-							<!-- <div>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
-								</div>
-								<a class="review-link" href="#">10 Review(s) | Add your review</a>
-							</div> -->
 							<div>
 								<h3 class="product-price">฿ <?= number_format($data['price'], );?> 
-								<!-- <del class="product-old-price">$990.00</del></h3> -->
-								<!-- <span class="product-available">In Stock</span> -->
 							</div>
 							<p><?=$data['com_detail'];?></p>
-
-							<!-- <div class="product-options">
-								<label>
-									Size
-									<select class="input-select">
-										<option value="0">X</option>
-									</select>
-								</label>
-								<label>
-									Color
-									<select class="input-select">
-										<option value="0">Red</option>
-									</select>
-								</label>
-							</div> -->
-
 						<form method="post" action="">
 							<div class="add-to-cart">
 								<div class="qty-label">
 									จำนวน
 									<div class="input-number">
 										<input class="text-center" type="number" value="1" minlength="5" name="qty">
-										<!-- <span class="qty-up">+</span>
-										<span class="qty-down">-</span> -->
 									</div>
 								</div>
 								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>
 								<a href="checkout.php?id=<?=$data['id'];?>">เพิ่มใส่รถเข็น</button>
 							</div>
 						</form>
-
-							<!-- <ul class="product-btns">
-								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-							</ul> -->
-
 							<ul class="product-links">
-								<li>หมวดหมู่ :</li>
+								<!-- <li>หมวดหมู่ :</li> -->
 								<li><a><?=$data['t_name'];?></a></li>
 							</ul>
 
 							<p><?=nl2br($data['detail']);?></p>
-
-							<!-- <ul class="product-links">
-								<li>Share:</li>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-							</ul> -->
-
 						</div>
 					</div>
 					<!-- /Product details -->

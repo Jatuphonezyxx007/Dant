@@ -277,38 +277,50 @@ error_reporting(E_NOTICE);
 
 
 
-					<?php
-					if(!empty($_SESSION['sid'])) {
-						foreach($_SESSION['sid'] as $pid) {
-							@$i++;
-							$sum[$pid] = $_SESSION['sprice'][$pid] * $_SESSION['sitem'][$pid] ;
-							@$total += $sum[$pid] ;
-							?>
 							
 					<div class="col-md-5 order-details">
 						<div class="section-title text-center">
 							<h3 class="title">สินค้าของคุณ</h3>
 						</div>
 						<div class="order-summary">
-							<div class="order-col">
+
+						<div class="order-col">
 								<div><strong>รายการ</strong></div>
 								<div><strong>รวม</strong></div>
 							</div>
+
+						<?php
+						if(!empty($_SESSION['sid'])) {
+						foreach($_SESSION['sid'] as $pid) {
+							@$i++;
+							$sum[$pid] = $_SESSION['sprice'][$pid] * $_SESSION['sitem'][$pid] ;
+							@$total += $sum[$pid] ;
+							?>
 							<div class="order-products">
 								<div class="order-col">
 									<div><?=$_SESSION['sitem'][$pid];?>x <?=$_SESSION['sname'][$pid];?></div>
 									<div><?=number_format($sum[$pid],0);?></div>
 								</div>
 							</div>
-							<div class="order-col">
-								<div>Shiping</div>
-								<div><strong>FREE</strong></div>
+							<?php } // end foreach ?>
+							<?php 
+							} else {
+								?>
+								<?php } // end if ?>
+
+								<div class="order-col">
+								<div>ค่าจัดส่ง</div>
+								<div><strong>ฟรี</strong></div>
 							</div>
-							<div class="order-col">
+
+								<div class="order-col">
 								<div><strong>ยอดรวม</strong></div>
 								<div><strong class="order-total"><?=number_format($total,0);?></strong></div>
 							</div>
 						</div>
+
+
+						<form method="post" action="">
 							<div class="payment-method">
 								<div class="input-radio">
 									<input type="radio" name="payment" id="payment-1">
@@ -317,13 +329,15 @@ error_reporting(E_NOTICE);
 										โอนเงินผ่านธนาคาร
 									</label>
 									<div class="caption">
-										<p>ชื่อบัญชี : </p>
-										<p>ธนาคาร :</p>
-										<p>สาขา :</p>
-										<p>เลขบัญชี :</p><br>
+										<p>ชื่อบัญชี : บริษัท Dant จำกัด </p>
+										<p>ธนาคาร : กสิกรไทย</p>
+										<p>สาขา : สุขุมวิท 107</p>
+										<p>เลขบัญชี : 097-3-55636-3</p><br>
 										<!-- <div class="mb-3"> -->
 										<label for="img_product" class="form-label">แจ้งชำระเงิน</label>
-										<input class="form-control" name="slip" type="file"><br>
+										<input class="form-control" name="slip" type="file" required><br>
+										<p>สำคัญ : สามารถอัพโหลดรูปภาพเฉพาะไฟล์ png หรือ jpg เท่านั้น</p>
+
 										<!-- <input class="form-control" name="no_order" placeholder="เลขรายการสั่งซื้อ"><br> -->
 									</div>
 								</div>
@@ -338,35 +352,9 @@ error_reporting(E_NOTICE);
 									<p>ลูกค้าจะชำระเงินก็ต่อเมื่อพัสดุที่สั่งไปจัดส่งถึงมือลูกค้าแล้ว !</p>
 								</div>
 							</div>
-						<a href="#" class="primary-btn order-submit">ยืนยันการชำระสินค้า</a>
+						</form>
+						<a href="#" class="primary-btn order-submit" name="submit">ยืนยันการชำระสินค้า</a>
 					</div>
-
-				<?php } // end foreach ?>
-							<!-- <tr>
-								<td colspan="5" align="right"><strong>รวมทั้งสิ้น</strong> &nbsp; </td>
-								<td><strong><?=number_format($total,0);?></strong></td>
-								<td><strong>บาท</strong></td>
-							</tr> -->
-							
-							<?php 
-							} else {
-								?>
-								<tr>
-									<td colspan="7" height="50" align="center">ไม่มีสินค้าในตะกร้า</td>
-								</tr>
-								<?php } // end if ?>
-
-
-
-							<!-- <tr>
-								<td><div class="text-center"> <?=$i;?></div></td>
-								<td><?=$_SESSION['sname'][$pid];?></td>
-								<td><?=number_format($_SESSION['sprice'][$pid],0);?></td>
-								<td> <?=$_SESSION['sitem'][$pid];?></td>
-								<td><?=number_format($sum[$pid],0);?></td>
-								<td><a href="clear_product.php?id=<?=$pid;?>" class="btn btn-danger">ลบ</a></td>
-							</tr> -->
-							</table>
 
 
 
@@ -382,45 +370,6 @@ error_reporting(E_NOTICE);
 								<div><strong>รวม</strong></div>
 							</div>
 
-							<?php
-							if(!empty($_SESSION['sid'])) {
-								foreach($_SESSION['sid'] as $pid) {
-									@$i++;
-									$sum[$pid] = $_SESSION['sprice'][$pid] * $_SESSION['sitem'][$pid] ;
-									@$total += $sum[$pid] ;
-									?>
-
-							<div class="order-products">
-								
-								<div class="order-col">
-									<div><?=$_SESSION['sname'][$pid];?></div>
-									<div><?=number_format($_SESSION['sprice'][$pid],0);?></div>
-								</div>
-							</div>
-
-							<?php } // end foreach ?>
-
-							<div class="order-col">
-								<div>Shiping</div>
-								<div><strong>FREE</strong></div>
-							</div>
-							<div class="order-col">
-								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total"><?=number_format($sum[$pid],0);?></strong></div>
-							</div>
-						</div>
-						<a href="#" class="primary-btn order-submit">Place order</a>
-					</div> -->
-					<!-- /Order Details -->
-					
-					<?php 
-					} else {
-						?>
-						<div class="section-title text-center">
-							<h3 class="sub-title">ไม่มีสินค้าใด ๆ ในรถเข็น</h3>
-						</div>
-						
-						<?php } // end if ?>
 					</blockquote>
 					
 				</div>
@@ -429,6 +378,31 @@ error_reporting(E_NOTICE);
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
+
+		<?php
+if(isset($_POST['submit'])){
+$allowed = array('png', 'jpg', 'jpeg');
+$filename = $_FILES['slip']['name'];
+$ext = pathinfo($filename, PATHINFO_EXTENSION);
+if (!in_array($ext, $allowed)) {
+    echo "<script>";
+    echo "alert('บันทึกข้อมูลสินค้าไม่สำเร็จ! ไฟล์รูปต้องเป็น png หรือ  jpg เท่านั้น');";
+    echo "</script>";
+    exit;
+}
+// $sql2 = "INSERT INTO `orders` (`oid`, `ototal`, `odate`, `member_id`, `c_name`, `c_phone`, `mem_ads`, `s_img`) VALUES ({$id}, '{$total}', CURRENT_TIMESTAMP, 0, '{$_POST['fullname']}', '{$_POST['tel']}', '{$_POST['ads']}', '{$ext}');";
+mysqli_query($conn, $sql2) or die ("เพิ่มข้อมูลสินค้าไม่สำเร็จ");
+mysqli_insert_id($conn);
+$idd = mysqli_insert_id($conn);
+
+@copy($_FILES['p_pics']['tmp_name'], "../assets/images/slips/".$idd.".".$ext);
+echo"<script>";
+echo "alert('เพิ่มข้อมูลสินค้าสำเร็จ');";
+echo"window.location='index.php';";
+echo"</script>";
+}
+
+?>
 
 		<!-- LINE FOOTER -->
 		<div id="newsletter" class="section">

@@ -391,6 +391,7 @@
 						<!-- /store top filter -->
 
 						<!-- store products -->
+						<div class="row">
 						<?php
                                 include("connectdb.php");
                                 $sql = "SELECT * FROM products WHERE type = 1";
@@ -399,7 +400,6 @@
 								
                                     ?>  
 
-					<div class="row">
 							<!-- product -->
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
@@ -414,12 +414,12 @@
 
 								<div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
 							</div>
-							
-						<?php
+							<?php
 						}
 						mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
 						?> 
 					</div>
+
 				<!-- /store products -->
 
 						<!-- store bottom filter -->

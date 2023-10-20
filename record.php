@@ -17,5 +17,5 @@
 		mysqli_query($conn, $sql2);
 	}
 	
-echo "<meta http-equiv=\"refresh\" content=\"0;URL=payment_1.php\">";
+echo "<meta http-equiv=\"refresh\" content=\"0;URL=index.php\">";
 ?>

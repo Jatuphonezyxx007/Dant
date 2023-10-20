@@ -34,6 +34,15 @@
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
 
 
+		<style>
+			.truncate {
+				white-space: nowrap;         /* Prevent text from wrapping to the next line */
+				overflow: hidden;            /* Hide the overflowed text */
+				text-overflow: ellipsis;     /* Display an ellipsis (...) for the truncated text */
+				width: 200px;                /* Adjust the width as needed */
+			}
+		</style>
+
 
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -85,7 +94,7 @@
 								<form method="post" action="store1.php">
 									<select class="input-select" name="select">
 										<option value="0">ทั้งหมด</option>
-										<option value="1">คอมพิวเตอร์</option>
+										<!-- <option value="1">คอมพิวเตอร์</option>
 										<option value="2">ซีพียู</option>
 										<option value="3">การ์ดจอ</option>
 										<option value="4">แรม</option>
@@ -94,7 +103,7 @@
 										<option value="8">คีย์บอร์ด</option>
 										<option value="9">หูฟัง</option>
 										<option value="10">หน้าจอ</option>
-										<option value="11">โน๊ตบุ๊ค</option>
+										<option value="11">โน๊ตบุ๊ค</option> -->
 									</select>
 									<input class="input" name="src" placeholder="ค้นหาสินค้าที่ต้องการ ..." autofocus>
 									<button class="search-btn" type="submit" name="Submit">ค้นหา</button>
@@ -107,7 +116,7 @@
 
 								$rs = mysqli_query($conn, $sql);
 								while ($data = mysqli_fetch_array($rs)){
-                    ?>   
+									?>   
 
 							</div>
 						</div>
@@ -187,9 +196,13 @@
 
 		<!-- SECTION -->
 		<div class="section">
+		<a href="store_com.php"><img src="./admin/src/assets/images/img_board/1.jpg" width="100%"></a>
+
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
+				
+
 				<div class="row">
 					<!-- shop -->
 					<div class="col-md-4 col-xs-6">
@@ -266,6 +279,7 @@
 
 					<!-- Products tab & slick -->
 					<div class="col-md-12">
+						<!-- <div class="row"> -->
 						<div class="row">
 							<div class="products-tabs">
 								<!-- tab -->
@@ -273,103 +287,211 @@
 									<div class="products-slick" data-nav="#slick-nav-1">
 
 										<!-- product -->
+
+
 										<div class="product">
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT p.*, t.t_name as type_name FROM products p INNER JOIN type t ON p.type = t.t_id WHERE p.id = 1";
+											$rs = mysqli_query($conn, $sql);
+											while ($data = mysqli_fetch_array($rs)){
+											?>  
 											<a href="product.html">
 												<div class="product-img">
 												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
 												</div>
 											</a>
 											<div class="product-body">
-												<p class="product-category">Category</p>
+												<p class="product-category"><?=$data['type_name'];?></p>
 												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
 												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
-												<div class="product-btns">
+												<div class="product-btn">
 												</div>
 											</div>
-										</div>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
+											</div>
 										<!-- /product -->
 
 
-										<!-- product -->
 										<div class="product">
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT p.*, t.t_name as type_name FROM products p INNER JOIN type t ON p.type = t.t_id WHERE p.id = 144";
+											$rs = mysqli_query($conn, $sql);
+											while ($data = mysqli_fetch_array($rs)){
+											?>  
 											<a href="product.html">
 												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
 												</div>
 											</a>
 											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="product.html">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-btns">
+												<p class="product-category"><?=$data['type_name'];?></p>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
+												<div class="product-btn">
 												</div>
 											</div>
-										</div>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
+											</div>
 										<!-- /product -->
 
-										<!-- product -->
+
 										<div class="product">
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT p.*, t.t_name as type_name FROM products p INNER JOIN type t ON p.type = t.t_id WHERE p.id = 109";
+											$rs = mysqli_query($conn, $sql);
+											while ($data = mysqli_fetch_array($rs)){
+											?>  
 											<a href="product.html">
 												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
 												</div>
 											</a>
 											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="product.html">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-btns">
+												<p class="product-category"><?=$data['type_name'];?></p>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
+												<div class="product-btn">
 												</div>
 											</div>
-										</div>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
+											</div>
 										<!-- /product -->
 
 
-										<!-- product -->
 										<div class="product">
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT p.*, t.t_name as type_name FROM products p INNER JOIN type t ON p.type = t.t_id WHERE p.id = 142";
+											$rs = mysqli_query($conn, $sql);
+											while ($data = mysqli_fetch_array($rs)){
+											?>  
 											<a href="product.html">
 												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
 												</div>
 											</a>
 											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="product.html">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-btns">
+												<p class="product-category"><?=$data['type_name'];?></p>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
+												<div class="product-btn">
 												</div>
 											</div>
-										</div>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
+											</div>
 										<!-- /product -->
 
-
-										<!-- product -->
 										<div class="product">
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT p.*, t.t_name as type_name FROM products p INNER JOIN type t ON p.type = t.t_id WHERE p.id = 139";
+											$rs = mysqli_query($conn, $sql);
+											while ($data = mysqli_fetch_array($rs)){
+											?>  
 											<a href="product.html">
 												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
 												</div>
 											</a>
 											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="product.html">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-btns">
+												<p class="product-category"><?=$data['type_name'];?></p>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
+												<div class="product-btn">
 												</div>
 											</div>
-										</div>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
+											</div>
 										<!-- /product -->
+
+
+										<div class="product">
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT p.*, t.t_name as type_name FROM products p INNER JOIN type t ON p.type = t.t_id WHERE p.id = 74";
+											$rs = mysqli_query($conn, $sql);
+											while ($data = mysqli_fetch_array($rs)){
+											?>  
+											<a href="product.html">
+												<div class="product-img">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
+												</div>
+											</a>
+											<div class="product-body">
+												<p class="product-category"><?=$data['type_name'];?></p>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
+												<div class="product-btn">
+												</div>
+											</div>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
+											</div>
+										<!-- /product -->
+
+										<div class="product">
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT p.*, t.t_name as type_name FROM products p INNER JOIN type t ON p.type = t.t_id WHERE p.id = 27";
+											$rs = mysqli_query($conn, $sql);
+											while ($data = mysqli_fetch_array($rs)){
+											?>  
+											<a href="product.html">
+												<div class="product-img">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
+												</div>
+											</a>
+											<div class="product-body">
+												<p class="product-category"><?=$data['type_name'];?></p>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
+												<div class="product-btn">
+												</div>
+											</div>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
+											</div>
+										<!-- /product -->
+
+
+										
 
 									</div>
 									<div id="slick-nav-1" class="products-slick-nav"></div>
 								</div>
+
+
+
+
 								<!-- /tab -->
-							</div>
 						</div>
 					</div>
+
+						
 					<!-- Products tab & slick -->
-
-
+		</div>
 				</div>
 				<!-- /row -->
 			</div>
@@ -377,15 +499,16 @@
 		</div>
 		<!-- /SECTION -->
 
+		<a href="store_laptop.php"><img src="./admin/src/assets/images/img_board/2.jpg" width="100%"></a>
 		<!-- HOT DEAL SECTION -->
-		<div id="hot-deal" class="section">
+		<!-- <div id="hot-deal" class="section"> -->
 			<!-- container -->
-			<div class="container">
+			<!-- <div class="container"> -->
 				<!-- row -->
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-12">
-						<div class="hot-deal">
-							<ul class="hot-deal-countdown">
+						<div class="hot-deal"> -->
+							<!-- <ul class="hot-deal-countdown">
 								<li>
 									<div>
 										<h3>02</h3>
@@ -410,17 +533,17 @@
 										<span>Secs</span>
 									</div>
 								</li>
-							</ul>
-							<h2 class="text-uppercase">hot deal this week</h2>
+							</ul> -->
+							<!-- <h2 class="text-uppercase">hot deal this week</h2>
 							<p>New Collection Up to 50% OFF</p>
 							<a class="primary-btn cta-btn" href="#">Shop now</a>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- /row -->
-			</div>
+			<!-- </div> -->
 			<!-- /container -->
-		</div>
+		<!-- </div> -->
 		<!-- /HOT DEAL SECTION -->
 
 		<!-- SECTION -->
@@ -433,15 +556,15 @@
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
-							<h3 class="title">Top selling</h3>
-							<div class="section-nav">
+							<h3 class="title">รวมการ์ดจอขายดี !</h3>
+							<!-- <div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
 									<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
 									<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
 									<li><a data-toggle="tab" href="#tab2">Cameras</a></li>
 									<li><a data-toggle="tab" href="#tab2">Accessories</a></li>
 								</ul>
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<!-- /section title -->
@@ -453,150 +576,142 @@
 								<!-- tab -->
 								<div id="tab2" class="tab-pane fade in active">
 									<div class="products-slick" data-nav="#slick-nav-2">
+
 										<!-- product -->
 										<div class="product">
-											<div class="product-img">
-												<img src="./img/product06.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT * FROM products WHERE id =27";
+										$rs = mysqli_query($conn, $sql);
+										while ($data = mysqli_fetch_array($rs)){
+											?>  
+											<a href="product.html">
+												<div class="product-img">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
 												</div>
-											</div>
+											</a>
 											<div class="product-body">
 												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
+												<div class="product-btn">
 												</div>
 											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
 											</div>
-										</div>
 										<!-- /product -->
 
 										<!-- product -->
 										<div class="product">
-											<div class="product-img">
-												<img src="./img/product07.png" alt="">
-												<div class="product-label">
-													<span class="new">NEW</span>
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT * FROM products WHERE id =29";
+										$rs = mysqli_query($conn, $sql);
+										while ($data = mysqli_fetch_array($rs)){
+											?>  
+											<a href="product.html">
+												<div class="product-img">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
 												</div>
-											</div>
+											</a>
 											<div class="product-body">
 												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
+												<div class="product-btn">
 												</div>
 											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
 											</div>
-										</div>
 										<!-- /product -->
 
 										<!-- product -->
 										<div class="product">
-											<div class="product-img">
-												<img src="./img/product08.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT * FROM products WHERE id =34";
+										$rs = mysqli_query($conn, $sql);
+										while ($data = mysqli_fetch_array($rs)){
+											?>  
+											<a href="product.html">
+												<div class="product-img">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
 												</div>
-											</div>
+											</a>
 											<div class="product-body">
 												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
+												<div class="product-btn">
 												</div>
 											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
 											</div>
-										</div>
 										<!-- /product -->
 
 										<!-- product -->
 										<div class="product">
-											<div class="product-img">
-												<img src="./img/product09.png" alt="">
-											</div>
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT * FROM products WHERE id =31";
+										$rs = mysqli_query($conn, $sql);
+										while ($data = mysqli_fetch_array($rs)){
+											?>  
+											<a href="product.html">
+												<div class="product-img">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
+												</div>
+											</a>
 											<div class="product-body">
 												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
+												<div class="product-btn">
 												</div>
 											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
 											</div>
-										</div>
 										<!-- /product -->
 
 										<!-- product -->
 										<div class="product">
-											<div class="product-img">
-												<img src="./img/product01.png" alt="">
-											</div>
+										<?php
+										include("connectdb.php");
+										$sql = "SELECT * FROM products WHERE id =38";
+										$rs = mysqli_query($conn, $sql);
+										while ($data = mysqli_fetch_array($rs)){
+											?>  
+											<a href="product.html">
+												<div class="product-img">
+												<img src='./admin/src/assets/images/imgs/<?=$data['id'];?>.<?=$data['img'];?>' height="250">
+												</div>
+											</a>
 											<div class="product-body">
 												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+												<h3 class="product-name truncate"><a href="product.php?id=<?=$data['id'];?>"><?=$data['name'];?></a></h3>
+												<h4 class="product-price">฿ <?= number_format($data['price'], );?></h4>
+												<div class="product-btn">
 												</div>
 											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<?php
+											}
+											mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+											?> 
 											</div>
-										</div>
 										<!-- /product -->
+
 									</div>
 									<div id="slick-nav-2" class="products-slick-nav"></div>
 								</div>
