@@ -271,7 +271,7 @@ if(isset($_POST['submit'])){
   @copy($_FILES['p_pics']['tmp_name'], "../assets/images/imgs/".$idd.".".$ext);
   echo"<script>";
   echo "alert('เพิ่มข้อมูลสินค้าสำเร็จ');";
-  echo"window.location='ui-card.php';";
+  echo"window.location='index2.php';";
   echo"</script>";
 }
 

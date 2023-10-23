@@ -1,3 +1,6 @@
+<?php
+session_start(); //รู้ว่าใครเป็นคนล็อคอิน จะโดนทำลายตอนเราออกจากระบบต้องเข้าระบบใหม่
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -221,12 +224,6 @@
 
 							$sql = "INSERT INTO `member` (`mem_id`, `mem_name`, `mem_email`, `mem_pwd`, `mem_phone`) VALUES (Null,'{$_POST['c_name']}','{$_POST['c_email']}', '$mem_pwd', '{$_POST['c_tel']}');";
 							mysqli_query($conn, $sql) or die ("ไม่สามารถสมัครบัญชีได้");
-							
-							// $mem_pwd = md5($_POST['mem_pwd']);
-							// // แทนที่รหัสผ่านใน SQL ด้วย MD5
-							// $sql = str_replace("'{$_POST['mem_pwd']}',", "'{$mem_pwd}',", $sql);
-							// $rs = mysqli_query($conn, $sql);
-
 
 							echo"<script>";
 							echo"alert ('สมัครสมาชิกเรียบร้อยแล้ว');";

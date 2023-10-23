@@ -13,7 +13,7 @@ if(isset($_GET['id'])){
 
 
     echo"<script>";
-    echo"window.location='ui-card.php?reload=1';";
+    echo"window.location='index2.php?reload=1';";
     echo"</script>";
 }
 ?>

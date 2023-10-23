@@ -1,3 +1,7 @@
+<?php
+session_start(); //รู้ว่าใครเป็นคนล็อคอิน จะโดนทำลายตอนเราออกจากระบบต้องเข้าระบบใหม่
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -40,11 +44,7 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-		<script type="text/javascript">
-		$(function () {
-			$('#datetimepicker1').datetimepicker();
-		});
-		</script>
+
 
 
 
@@ -92,12 +92,12 @@
 								<!-- /Wishlist -->
 
 								<!-- Cart -->
-								<div class="dropdown">
+								<!-- <div class="dropdown">
 									<a class="dropdown-toggle" href="checkout.php">
 										<i class="fa fa-shopping-cart"></i>
 										<span>รถเข็น</span>
 									</a>
-								</div>
+								</div> -->
 								<!-- /Cart -->
 
 								<!-- Menu Toogle -->
@@ -143,26 +143,6 @@
 		</nav>
 		<!-- /NAVIGATION -->
 
-		<!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Checkout</h3>
-						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li class="active">Checkout</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
-
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -170,76 +150,56 @@
 				<!-- row -->
 				<div class="row">
 
-					<div class="col-md-3">
+					<div class="col-md-4">
+					
 					</div>
 
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 					<!-- Order Details -->
-					<div class="col-md-5 order-details">
+					<div class="col-md-4 order-details">
 						<div class="section-title text-center">
-							<h3 class="title">สมัครบัญชี</h3> <br><br>
+							<h3 class="title">เข้าสู่ระบบ</h3> <br><br>
 							<h6 class="sub-title">ยินดีต้อนรับลูกค้าทุกท่านเข้าสู่ครอบครัวของเรา Dant</h6>
 						</div>
-						<form method="post" action="" enctype="multipart/form-data">
-							<input type="text" class="form-control" name="c_name" placeholder="ชื่อ - นามสกุล" autofocus><br>
-							<input type="tel" class="form-control"name="c_tel"placeholder="เบอร์โทร" maxlength="10"><br>
+						<form method="post" action="index.php" enctype="multipart/form-data">
 							<input type="email" class="form-control" name="c_email" placeholder="อีเมล์"><br>
 							<input type="password" class="form-control"name="c_pwd"placeholder="รหัสผ่าน"><br>
+							
+							<!-- <a href="#" class="primary-btn order-submit" name="submit">เข้าสู่ระบบ</a> -->
+								<button class="primary-btn"name="submit">เข้าสู่ระบบ</button> <br><br><br>
+								<a href="sign_up.php" > สมัครสมาชิก</a>
 
-							<button class="primary-btn order-submit"name="submit">สมัครสมาชิก</button>
-						<!-- <a href="#" class="primary-btn order-submit" name="submit">สมัครสมาชิก</a> -->
+
 						</form>
 
-						<?php
-						if(isset($_POST['submit'])){
-							include("connectdb.php");
-
-							// เข้ารหัสรหัสผ่านด้วยฟังก์ชัน bcrypt
-							$mem_pwd = password_hash($_POST['mem_pwd'], PASSWORD_DEFAULT);
-
-							$sql = "INSERT INTO `member` (`mem_id`, `mem_name`, `mem_email`, `mem_pwd`, `mem_phone`) VALUES (Null,'{$_POST['c_name']}','{$_POST['c_email']}', '$mem_pwd', '{$_POST['c_tel']}');";
-							mysqli_query($conn, $sql) or die ("ไม่สามารถสมัครบัญชีได้");
-							
-							// $mem_pwd = md5($_POST['mem_pwd']);
-							// // แทนที่รหัสผ่านใน SQL ด้วย MD5
-							// $sql = str_replace("'{$_POST['mem_pwd']}',", "'{$mem_pwd}',", $sql);
-							// $rs = mysqli_query($conn, $sql);
-
-
-							echo"<script>";
-							echo"alert ('สมัครสมาชิกเรียบร้อยแล้ว');";
-							echo"window.location='index.php';";
-							echo"</script>";
-						}
-						?>
-
 					</div>
+					
+					
+
+						<!-- // include("connectdb.php");
+						// $sql = "SELECT * FROM `member` WHERE `mem_email`='{$_POST['c_email']}' AND `mem_pws`='".md5($_POST['c_pwc'])."' LIMIT 1 ";
+						// $rs = mysqli_query($conn, $sql) or die ("select ไม่ได้");
+						// $num = mysqli_num_rows($rs);
+						// //var_dump($num); 
+						// if($num>0){
+						// 	$data = mysqli_fetch_array($rs);
+						// 	$_SESSION['aid'] = $data['a_id'];
+						// 	$_SESSION['aname'] = $data['a_name'];
+						// 	echo "<script>";
+						// 	echo "window.location='index2.php';";
+						// 	echo "</script>";
+						// } else {
+						// 	echo "<script>";
+						// 	echo "alert('Username หรือ Password ไม่ถูกต้อง');";
+						// 	echo "</script>";
+						// 	exit;
+						}
+}
+?> -->
+
 
 	
 
-<!-- <script>
-function checkPassword() {
-	 // รับค่ารหัสผ่านจาก input ทั้งสองช่อง
-	const password = document.querySelector("input[name='c_pwd']").value;
-	const confirmPassword = document.querySelector("input[name='con_pwd']").value;
-	// เปรียบเทียบค่าทั้งสองช่อง
-	if (password === confirmPassword) {
-		// รหัสผ่านตรงกัน
-		return true;
-	} else {
-		// รหัสผ่านไม่ตรงกัน
-		return false;
-	}
-}
-// เพิ่ม event listener ให้กับ input type="submit"
-document.querySelector("input[type='submit']").addEventListener("click", function() {
-	// ตรวจสอบว่ารหัสผ่านตรงกันหรือไม่
-	if (!checkPassword()) {
-		// รหัสผ่านไม่ตรงกัน แสดงข้อความแจ้งเตือน
-		alert("รหัสผ่านไม่ตรงกัน");
-		return false;
-    }
-});
-</script> -->
 
 					<!-- /Order Details -->
 				</div>
@@ -315,19 +275,6 @@ document.querySelector("input[type='submit']").addEventListener("click", functio
 								</ul>
 							</div>
 						</div>
-
-						<!-- <div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Service</h3>
-								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
-								</ul>
-							</div>
-						</div> -->
 					</div>
 					<!-- /row -->
 				</div>
@@ -338,6 +285,45 @@ document.querySelector("input[type='submit']").addEventListener("click", functio
 		<!-- /FOOTER -->
 
 
+		<?php
+		include("connectdb.php");
+		if(isset($_POST['submit'])){
+			// ตรวจสอบว่าผู้ใช้กรอกข้อมูลครบถ้วนหรือไม่
+			if(empty($_POST['c_email']) || empty($_POST['c_pwd'])){
+    echo"<script>";
+    echo"alert ('กรุณากรอกข้อมูลให้ครบถ้วน');";
+    echo"window.location='index.php';";
+    echo"</script>";
+    }
+
+    // ตรวจสอบชื่อผู้ใช้และรหัสผ่าน
+    $sql = "SELECT * FROM `member` WHERE `c_email` = '{$_POST['mem_email']}' AND `c_pwd` = '{$_POST['mem_pwd']}';";
+    $result = mysqli_query($conn, $sql);
+
+    // หากพบข้อมูลผู้ใช้
+    if(mysqli_num_rows($result) > 0){
+      // ตั้งค่า session สำหรับผู้ใช้
+    $row = mysqli_fetch_assoc($result);
+    $_SESSION['mem_id'] = $row['mem_id'];
+    $_SESSION['mem_name'] = $row['mem_name'];
+
+      // แจ้งเตือนผู้ใช้ว่าเข้าสู่ระบบสำเร็จ
+    echo"<script>";
+    echo"alert ('เข้าสู่ระบบสำเร็จ');";
+    echo"window.location='index2.php';";
+    echo"</script>";
+    }
+
+    // หากไม่พบข้อมูลผู้ใช้
+    else{
+      // แจ้งเตือนผู้ใช้ว่าชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง
+    echo"<script>";
+    echo"alert ('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');";
+    echo"window.location='sign_in.php';";
+    echo"</script>";
+    }
+}
+?>
 
 
 

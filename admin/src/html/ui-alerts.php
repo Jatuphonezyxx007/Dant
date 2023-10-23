@@ -153,12 +153,12 @@ if(empty($_SESSION['aid'])){
 
                 <table class="table table-striped table-sm-gap" width="100%">
                   <tr>
-                    <td width="15%" class="text-center">&nbsp;</td>
-                    <td width="20%" class="text-center">เลขที่ใบสั่งซื้อ</td>
+                    <td width="10%" class="text-center">&nbsp;</td>
+                    <td width="30%" class="text-center">เลขที่ใบสั่งซื้อ</td>
                     <td width="20%" class="text-center">วันที่</td>
                     <td width="20%" class="text-center">ราคารวม</td>
                     <td width="20%" class="text-center">ลูกค้า</td>
-                    <th width="5%">&nbsp;</th>
+                    <!-- <th width="5%">&nbsp;</th> -->
                   </tr>
                   
                   <?php
@@ -173,8 +173,8 @@ if(empty($_SESSION['aid'])){
                   <td class="text-center"><?=$data['oid'];?></td>
                   <td class="text-center"><?=$data['odate'];?></td>
                   <td class="text-center"><?=number_format($data['ototal'],0);?> บาท</td>
-                  <td class="text-center">---</td>
-                  <td><a href="clear_product.php?id=<?=$pid;?>" class="btn btn-danger">ลบ</a></td>
+                  <td class="text-center"><ชื่อ></td>
+                  <!-- <td><a href="clear_product.php?id=<?=$pid;?>" class="btn btn-danger">ลบ</a></td> -->
                 </tr>
                 
                 <?php  }  ?>

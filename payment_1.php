@@ -249,7 +249,7 @@ error_reporting(E_NOTICE);
 
 				<!-- row -->
 				<div class="row">
-					<form method="post" action="">
+					<form method="post" action="record.php">
 						<div class="col-md-7">
 							<div class="billing-details">
 								<div class="section-title">
@@ -273,89 +273,130 @@ error_reporting(E_NOTICE);
 								</div>
 							</div>
 						</div>
-					</form>
 
+						<div class="col-md-5 order-details">
+							<div class="section-title text-center">
+								<h3 class="title">สินค้าของคุณ</h3>
+							</div>
 
-
-							
-					<div class="col-md-5 order-details">
-						<div class="section-title text-center">
-							<h3 class="title">สินค้าของคุณ</h3>
-						</div>
 						<div class="order-summary">
-
-						<div class="order-col">
+							<div class="order-col">
 								<div><strong>รายการ</strong></div>
 								<div><strong>รวม</strong></div>
 							</div>
 
-						<?php
-						if(!empty($_SESSION['sid'])) {
-						foreach($_SESSION['sid'] as $pid) {
-							@$i++;
-							$sum[$pid] = $_SESSION['sprice'][$pid] * $_SESSION['sitem'][$pid] ;
-							@$total += $sum[$pid] ;
-							?>
-							<div class="order-products">
-								<div class="order-col">
-									<div><?=$_SESSION['sitem'][$pid];?>x <?=$_SESSION['sname'][$pid];?></div>
-									<div><?=number_format($sum[$pid],0);?></div>
+							<!-- <?php
+							if(!empty($_SESSION['sid'])) {
+							foreach($_SESSION['sid'] as $pid) {
+								@$i++;
+								$sum[$pid] = $_SESSION['sprice'][$pid] * $_SESSION['sitem'][$pid] ;
+								@$total += $sum[$pid] ;
+								?>
+								<div class="order-products">
+									<div class="order-col">
+										<div><?=$_SESSION['sitem'][$pid];?>x <?=$_SESSION['sname'][$pid];?></div>
+										<div><?=number_format($sum[$pid],0);?></div>
+									</div>
+								</div>
+								<?php } // end foreach ?>
+								<?php 
+								} else {
+									?>
+									<?php } // end if ?> -->
+
+
+
+
+
+
+									<?php
+									include("connectdb.php");
+									// $sql = "SELECT MAX(oid) AS oid FROM order";
+									$sql = "SELECT  *  FROM  orders_detail INNER JOIN products ON orders_detail.pid = products.id WHERE orders_detail.oid = '".$_GET['a']."'  ";
+									$rs = mysqli_query($conn, $sql) ;
+									$i = 0;
+									while ($data = mysqli_fetch_array($rs, MYSQLI_BOTH)) {
+										$i++;
+										$sum = $data['price'] * $data['item'] ;
+										@$total += $sum;
+										?>
+										
+										<div class="order-products">
+											<div class="order-col">
+												<div><?=$data['item'];?> x <?=$data['name'];?></div>
+												<div><?=number_format($sum,0);?></div>
+											</div>
+										</div>
+
+
+
+										<!-- <tr>
+											<td class="text-center"><a href="detail.php?a=<?=$data['oid'];?>">รายละเอียด</a></td>
+											<td class="text-center"><?=$data['oid'];?></td>
+											<td class="text-center"><?=$data['odate'];?></td>
+											<td class="text-center"><?=number_format($data['ototal'],0);?> บาท</td>
+											<td class="text-center"><ชื่อ></td>
+											<td><a href="clear_product.php?id=<?=$pid;?>" class="btn btn-danger">ลบ</a></td>
+										</tr> -->
+
+
+									<div class="order-col">
+									<div>ค่าจัดส่ง</div>
+									<div><strong>ฟรี</strong></div>
+								</div>
+
+									<div class="order-col">
+									<div><strong>ยอดรวม</strong></div>
+									<div><strong class="order-total"><?=number_format($total,0);?></strong></div>
 								</div>
 							</div>
-							<?php } // end foreach ?>
-							<?php 
-							} else {
-								?>
-								<?php } // end if ?>
-
-								<div class="order-col">
-								<div>ค่าจัดส่ง</div>
-								<div><strong>ฟรี</strong></div>
-							</div>
-
-								<div class="order-col">
-								<div><strong>ยอดรวม</strong></div>
-								<div><strong class="order-total"><?=number_format($total,0);?></strong></div>
-							</div>
-						</div>
 
 
-						<form method="post" action="">
-							<div class="payment-method">
+								<div class="payment-method">
+									<div class="input-radio">
+										<input type="radio" name="payment" id="payment-1">
+										<label for="payment-1">
+											<span></span>
+											โอนเงินผ่านธนาคาร
+										</label>
+										<div class="caption">
+											<p>ชื่อบัญชี : บริษัท Dant จำกัด </p>
+											<p>ธนาคาร : กสิกรไทย</p>
+											<p>สาขา : สุขุมวิท 107</p>
+											<p>เลขบัญชี : 097-3-55636-3</p><br>
+											<!-- <div class="mb-3"> -->
+											<label for="img_product" class="form-label">แจ้งชำระเงิน</label>
+											<input class="form-control" name="slip" type="file" required><br>
+											<p>สำคัญ : สามารถอัพโหลดรูปภาพเฉพาะไฟล์ png หรือ jpg เท่านั้น</p>
+
+											<!-- <input class="form-control" name="no_order" placeholder="เลขรายการสั่งซื้อ"><br> -->
+										</div>
+									</div>
+								</div>
 								<div class="input-radio">
-									<input type="radio" name="payment" id="payment-1">
-									<label for="payment-1">
+									<input type="radio" name="payment" id="payment-2">
+									<label for="payment-2">
 										<span></span>
-										โอนเงินผ่านธนาคาร
+										เก็บเงินปลายทาง
 									</label>
 									<div class="caption">
-										<p>ชื่อบัญชี : บริษัท Dant จำกัด </p>
-										<p>ธนาคาร : กสิกรไทย</p>
-										<p>สาขา : สุขุมวิท 107</p>
-										<p>เลขบัญชี : 097-3-55636-3</p><br>
-										<!-- <div class="mb-3"> -->
-										<label for="img_product" class="form-label">แจ้งชำระเงิน</label>
-										<input class="form-control" name="slip" type="file" required><br>
-										<p>สำคัญ : สามารถอัพโหลดรูปภาพเฉพาะไฟล์ png หรือ jpg เท่านั้น</p>
-
-										<!-- <input class="form-control" name="no_order" placeholder="เลขรายการสั่งซื้อ"><br> -->
+										<p>ลูกค้าจะชำระเงินก็ต่อเมื่อพัสดุที่สั่งไปจัดส่งถึงมือลูกค้าแล้ว !</p>
 									</div>
 								</div>
 							</div>
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-2">
-								<label for="payment-2">
-									<span></span>
-									เก็บเงินปลายทาง
-								</label>
-								<div class="caption">
-									<p>ลูกค้าจะชำระเงินก็ต่อเมื่อพัสดุที่สั่งไปจัดส่งถึงมือลูกค้าแล้ว !</p>
-								</div>
-							</div>
-						</form>
-						<a href="#" class="primary-btn order-submit" name="submit">ยืนยันการชำระสินค้า</a>
+					</form>
+					
+					<!-- <?php  
+				}  ?> -->
+
+
+
+						<a href="record.php" class="primary-btn order-submit" name="submit">ยืนยันการชำระสินค้า</a>
 					</div>
 
+
+
+					
 
 
 
@@ -379,30 +420,6 @@ error_reporting(E_NOTICE);
 		</div>
 		<!-- /SECTION -->
 
-		<?php
-if(isset($_POST['submit'])){
-$allowed = array('png', 'jpg', 'jpeg');
-$filename = $_FILES['slip']['name'];
-$ext = pathinfo($filename, PATHINFO_EXTENSION);
-if (!in_array($ext, $allowed)) {
-    echo "<script>";
-    echo "alert('บันทึกข้อมูลสินค้าไม่สำเร็จ! ไฟล์รูปต้องเป็น png หรือ  jpg เท่านั้น');";
-    echo "</script>";
-    exit;
-}
-// $sql2 = "INSERT INTO `orders` (`oid`, `ototal`, `odate`, `member_id`, `c_name`, `c_phone`, `mem_ads`, `s_img`) VALUES ({$id}, '{$total}', CURRENT_TIMESTAMP, 0, '{$_POST['fullname']}', '{$_POST['tel']}', '{$_POST['ads']}', '{$ext}');";
-mysqli_query($conn, $sql2) or die ("เพิ่มข้อมูลสินค้าไม่สำเร็จ");
-mysqli_insert_id($conn);
-$idd = mysqli_insert_id($conn);
-
-@copy($_FILES['p_pics']['tmp_name'], "../assets/images/slips/".$idd.".".$ext);
-echo"<script>";
-echo "alert('เพิ่มข้อมูลสินค้าสำเร็จ');";
-echo"window.location='index.php';";
-echo"</script>";
-}
-
-?>
 
 		<!-- LINE FOOTER -->
 		<div id="newsletter" class="section">
@@ -499,6 +516,78 @@ echo"</script>";
 		<script src="js/nouislider.min.js"></script>
 		<script src="js/jquery.zoom.min.js"></script>
 		<script src="js/main.js"></script>
+
+
+
+		<div class="container-fluid">
+        <div class="card">
+        <div class="card-body">
+            <h3 class="card-title fw-semibold mb-4">รายละเอียดคำสั่งซื้อ</h3>
+
+            <h5>รายละเอียดใบสั่งซื้อ เลขที่ <?=$_GET['a'];?></h5><br>
+            <table width="100%" class="table table-striped table-sm-gap">
+            <tr>
+                <td width="5%" class="text-center">ที่</td>
+                <td width="5%" class="text-center">รหัสสินค้า</td>
+                <td width="40%" class="text-center">สินค้า</td>
+                <td width="10%" class="text-center">จำนวน</td>
+                <td width="20%" class="text-center">ราคา/ชิ้น</td>
+                <td width="20%" class="text-center">รวม (บาท)</td>
+            </tr>
+        
+            <?php
+            include("connectdb.php");
+			$sql = "SELECT MAX(oid) AS oid FROM order";
+            $rs = mysqli_query($conn, $sql) ;
+            $i = 0;
+            while ($data = mysqli_fetch_array($rs, MYSQLI_BOTH)) {
+                $i++;
+                $sum = $data['price'] * $data['item'] ;
+                @$total += $sum;
+                ?>
+                <tr>
+                <td><?=$i;?></td>
+                <td class="text-center"><?=@$data['id'];?></td>
+                <td><?=$data['name'];?></td>
+                <td class="text-center"><?=$data['item'];?></td>
+                <td class="text-center"><?=number_format($data['price'],0);?></td>
+                <td class="text-center"><?=number_format($sum,0);?></td>
+                </tr>
+                
+                <?php } ?>
+                <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td class="text-center">ราคารวม</td>
+                <td class="text-center"><?=number_format($total,0);?></td>
+                </tr>
+            </table>
+
+            <!-- <p class="mb-0">This is a sample page </p> -->
+        </div>
+        </div>
+    </div>
+
+
+
+<?php
+// if(isset($_POST['submit'])){
+// 	$sql2 = "INSERT INTO `cus_address` (`cus_id`, `cus_name`, `cus_email`, `cus_add`, `cus_zip`, `cus_phone`, `oid`) VALUES (NULL, '{$_POST['fullname']}', '{$_POST['email']}', '{$_POST['ads']}', '{$_POST['zip-code']}', '{$_POST['tel']}'), '".$_SESSION['sid'][$pid]."' ;";
+
+// 	mysqli_query($conn, $sql2) or die ("can't add data");
+//   mysqli_query($conn, $sql2) or die ("ลองอีกครั้ง");
+//   mysqli_insert_id($conn);
+
+//   echo"<script>";
+//   echo "alert('เพิ่มข้อมูลสินค้าสำเร็จ');";
+//   echo"window.location='index2.php';";
+//   echo"</script>";
+// }
+
+?>
+
 
 	</body>
 </html>

@@ -265,12 +265,12 @@ myModal.addEventListener('shown.bs.modal', () => {
 
                     <button type="submit" name="submit" class="btn btn-primary" style="float:right">บันทึกข้อมูล</button>
 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
-</button>
+</button> -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -286,7 +286,7 @@ myModal.addEventListener('shown.bs.modal', () => {
       </div>
     </div>
   </div>
-</div>
+</div> -->
                 </div>
               </form>
 
@@ -321,11 +321,13 @@ if(isset($_POST['submit'])){
     } else {
         $sql = "UPDATE `products` SET `name`='{$_POST['p_name']}', `detail`='{$_POST['p_detail']}', `price`='{$_POST['p_price']}', `type`='{$_POST['p_type']}' WHERE `id`='{$_GET['id']}';";
     }
-    //var_dump($s
+
+    
+    //var_dump($sql);exit;
     mysqli_query($conn, $sql) or die("แก้ไขข้อมูลสินค้าไม่ได้");
     echo"<script>";
     echo "alert('แก้ไขข้อมูลสำเร็จ');";
-    echo "window.location=ui-card.php';";
+    echo "window.location=index2.php';";
     echo"</script>";
 }    
 ?>

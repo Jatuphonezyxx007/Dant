@@ -16,6 +16,12 @@
 		$sql2 = "insert into orders_detail values('', '$id', '".$_SESSION['sid'][$pid]."', '".$_SESSION['sitem'][$pid]."');" ;
 		mysqli_query($conn, $sql2);
 	}
+
+	// if(isset($_POST['submit'])){
+	// 	$sql3 = "INSERT INTO `cus_address` (`cus_id`, `cus_name`, `cus_email`, `cus_add`, `cus_zip`, `cus_phone`, `oid`) VALUES (NULL, '{$_POST['fullname']}', '{$_POST['email']}', '{$_POST['ads']}', '{$_POST['zip-code']}', '{$_POST['tel']}'), '".$_SESSION['sid'][$pid]."' ;";
+	// 	mysqli_query($conn, $sql3) or die ("can't add data");
+	// }
 	
-echo "<meta http-equiv=\"refresh\" content=\"0;URL=index.php\">";
+	
+echo "<meta http-equiv=\"refresh\" content=\"0;URL=payment_1.php\">";
 ?>

@@ -237,12 +237,12 @@
 							<p><?=$data['com_detail'];?></p>
 						<form method="post" action="">
 							<div class="add-to-cart">
-								<div class="qty-label">
+								<!-- <div class="qty-label">
 									จำนวน
 									<div class="input-number">
 										<input class="text-center" type="number" value="1" minlength="5" name="qty">
 									</div>
-								</div>
+								</div> -->
 								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>
 								<a href="checkout.php?id=<?=$data['id'];?>">เพิ่มใส่รถเข็น</button>
 							</div>
@@ -278,20 +278,20 @@
 		<!-- /SECTION -->
 
 		<!-- Section -->
-		<div class="section">
+		<!-- <div class="section"> -->
 			<!-- container -->
-			<div class="container">
+			<!-- <div class="container"> -->
 				<!-- row -->
-				<div class="row">
+				<!-- <div class="row"> -->
 
-					<div class="col-md-12">
+					<!-- <div class="col-md-12">
 						<div class="section-title text-center">
 							<h3 class="title">Related Products</h3>
 						</div>
-					</div>
+					</div> -->
 
 					<!-- product -->
-					<div class="col-md-3 col-xs-6">
+					<!-- <div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
 								<img src="./img/product01.png" alt="">
@@ -315,11 +315,11 @@
 								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- /product -->
 
 					<!-- product -->
-					<div class="col-md-3 col-xs-6">
+					<!-- <div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
 								<img src="./img/product02.png" alt="">
@@ -331,13 +331,13 @@
 								<p class="product-category">Category</p>
 								<h3 class="product-name"><a href="#">product name goes here</a></h3>
 								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
+								<div class="product-rating"> -->
 									<!-- <i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i> -->
-								</div>
+								<!-- </div>
 								<div class="product-btns">
 									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
@@ -348,13 +348,13 @@
 								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- /product -->
 
-					<div class="clearfix visible-sm visible-xs"></div>
+					<!-- <div class="clearfix visible-sm visible-xs"></div> -->
 
 					<!-- product -->
-					<div class="col-md-3 col-xs-6">
+					<!-- <div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
 								<img src="./img/product03.png" alt="">
@@ -363,13 +363,13 @@
 								<p class="product-category">Category</p>
 								<h3 class="product-name"><a href="#">product name goes here</a></h3>
 								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
+								<div class="product-rating"> -->
 									<!-- <i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star-o"></i> -->
-								</div>
+								<!-- </div>
 								<div class="product-btns">
 									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
@@ -380,11 +380,11 @@
 								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- /product -->
 
 					<!-- product -->
-					<div class="col-md-3 col-xs-6">
+					<!-- <div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
 								<img src="./img/product04.png" alt="">
@@ -405,14 +405,14 @@
 								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- /product -->
 
-				</div>
+				<!-- </div> -->
 				<!-- /row -->
-			</div>
+			<!-- </div> -->
 			<!-- /container -->
-		</div>
+		<!-- </div> -->
 		<!-- /Section -->
 
 		
