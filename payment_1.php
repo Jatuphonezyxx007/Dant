@@ -15,6 +15,7 @@ error_reporting(E_NOTICE);
 		$_SESSION['sdetail'][$id] = $data['detail'];
 		$_SESSION['spicture'][$id] = $data['img'];
 		@$_SESSION['sitem'][$id]++;
+		$_SESSION['oid'] = $oid;
 	}
 
 
@@ -249,7 +250,7 @@ error_reporting(E_NOTICE);
 
 				<!-- row -->
 				<div class="row">
-					<form method="post" action="record.php">
+					<form method="post" action="">
 						<div class="col-md-7">
 							<div class="billing-details">
 								<div class="section-title">
@@ -273,6 +274,8 @@ error_reporting(E_NOTICE);
 								</div>
 							</div>
 						</div>
+						</form>
+
 
 						<div class="col-md-5 order-details">
 							<div class="section-title text-center">
@@ -285,7 +288,7 @@ error_reporting(E_NOTICE);
 								<div><strong>รวม</strong></div>
 							</div>
 
-							<!-- <?php
+							<?php
 							if(!empty($_SESSION['sid'])) {
 							foreach($_SESSION['sid'] as $pid) {
 								@$i++;
@@ -294,51 +297,19 @@ error_reporting(E_NOTICE);
 								?>
 								<div class="order-products">
 									<div class="order-col">
-										<div><?=$_SESSION['sitem'][$pid];?>x <?=$_SESSION['sname'][$pid];?></div>
+										<div><?=$_SESSION['sitem'][$pid];?> x <?=$_SESSION['sname'][$pid];?></div>
 										<div><?=number_format($sum[$pid],0);?></div>
 									</div>
 								</div>
-								<?php } // end foreach ?>
+								<?php } // end foreach 
+								?>
+
 								<?php 
 								} else {
-									?>
-									<?php } // end if ?> -->
+									
+								 } // end if ?>
 
-
-
-
-
-
-									<?php
-									include("connectdb.php");
-									// $sql = "SELECT MAX(oid) AS oid FROM order";
-									$sql = "SELECT  *  FROM  orders_detail INNER JOIN products ON orders_detail.pid = products.id WHERE orders_detail.oid = '".$_GET['a']."'  ";
-									$rs = mysqli_query($conn, $sql) ;
-									$i = 0;
-									while ($data = mysqli_fetch_array($rs, MYSQLI_BOTH)) {
-										$i++;
-										$sum = $data['price'] * $data['item'] ;
-										@$total += $sum;
-										?>
-										
-										<div class="order-products">
-											<div class="order-col">
-												<div><?=$data['item'];?> x <?=$data['name'];?></div>
-												<div><?=number_format($sum,0);?></div>
-											</div>
-										</div>
-
-
-
-										<!-- <tr>
-											<td class="text-center"><a href="detail.php?a=<?=$data['oid'];?>">รายละเอียด</a></td>
-											<td class="text-center"><?=$data['oid'];?></td>
-											<td class="text-center"><?=$data['odate'];?></td>
-											<td class="text-center"><?=number_format($data['ototal'],0);?> บาท</td>
-											<td class="text-center"><ชื่อ></td>
-											<td><a href="clear_product.php?id=<?=$pid;?>" class="btn btn-danger">ลบ</a></td>
-										</tr> -->
-
+									
 
 									<div class="order-col">
 									<div>ค่าจัดส่ง</div>
@@ -384,14 +355,25 @@ error_reporting(E_NOTICE);
 									</div>
 								</div>
 							</div>
-					</form>
-					
-					<!-- <?php  
-				}  ?> -->
+							
+							
+							<a href="" class="primary-btn order-submit" name="save">ยืนยันการชำระสินค้า</a>
+
+							<?php
+						if(isset($_POST['save'])){
+							include("connectdb.php");
+							$cus = mysqli_real_escape_string($conn, $_POST['cus']);
+							$sql = "INSERT INTO `cus_address` (`cus_id`, `cus_name`, `cus_email`, `cus_add`, `cus_zip`, `cus_phone`, `oid`) VALUES (NULL, '{$_POST['fullname']}', '{$_POST['email']}','{$_POST['ads']}','{$_POST['zip-code']}','{$_POST['tel']}','{$_POST['$pid']}' ;";
+							mysqli_query($conn, $sql) or die ("ไม่สามารถเพิ่มข้อมูลได้");
+							echo"<script>";
+							echo"alert('เพิ่มข้อมูลสำเร็จ');";
+							echo"window.location='index.php';";
+							echo"</script>";
+}
+?>
 
 
 
-						<a href="record.php" class="primary-btn order-submit" name="submit">ยืนยันการชำระสินค้า</a>
 					</div>
 
 
@@ -519,56 +501,6 @@ error_reporting(E_NOTICE);
 
 
 
-		<div class="container-fluid">
-        <div class="card">
-        <div class="card-body">
-            <h3 class="card-title fw-semibold mb-4">รายละเอียดคำสั่งซื้อ</h3>
-
-            <h5>รายละเอียดใบสั่งซื้อ เลขที่ <?=$_GET['a'];?></h5><br>
-            <table width="100%" class="table table-striped table-sm-gap">
-            <tr>
-                <td width="5%" class="text-center">ที่</td>
-                <td width="5%" class="text-center">รหัสสินค้า</td>
-                <td width="40%" class="text-center">สินค้า</td>
-                <td width="10%" class="text-center">จำนวน</td>
-                <td width="20%" class="text-center">ราคา/ชิ้น</td>
-                <td width="20%" class="text-center">รวม (บาท)</td>
-            </tr>
-        
-            <?php
-            include("connectdb.php");
-			$sql = "SELECT MAX(oid) AS oid FROM order";
-            $rs = mysqli_query($conn, $sql) ;
-            $i = 0;
-            while ($data = mysqli_fetch_array($rs, MYSQLI_BOTH)) {
-                $i++;
-                $sum = $data['price'] * $data['item'] ;
-                @$total += $sum;
-                ?>
-                <tr>
-                <td><?=$i;?></td>
-                <td class="text-center"><?=@$data['id'];?></td>
-                <td><?=$data['name'];?></td>
-                <td class="text-center"><?=$data['item'];?></td>
-                <td class="text-center"><?=number_format($data['price'],0);?></td>
-                <td class="text-center"><?=number_format($sum,0);?></td>
-                </tr>
-                
-                <?php } ?>
-                <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td class="text-center">ราคารวม</td>
-                <td class="text-center"><?=number_format($total,0);?></td>
-                </tr>
-            </table>
-
-            <!-- <p class="mb-0">This is a sample page </p> -->
-        </div>
-        </div>
-    </div>
 
 
 

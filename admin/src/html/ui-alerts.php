@@ -177,7 +177,8 @@ if(empty($_SESSION['aid'])){
                   <!-- <td><a href="clear_product.php?id=<?=$pid;?>" class="btn btn-danger">ลบ</a></td> -->
                 </tr>
                 
-                <?php  }  ?>
+                <?php  
+              }  ?>
 
 
 
