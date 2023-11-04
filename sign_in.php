@@ -70,7 +70,7 @@ session_start(); //รู้ว่าใครเป็นคนล็อคอ�
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
+								<a href="index.php" class="logo">
 									<img src="img/DANT.png" alt="icon" width="250px">
 								</a>
 							</div>
@@ -128,7 +128,7 @@ session_start(); //รู้ว่าใครเป็นคนล็อคอ�
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="index.html">หน้าหลัก</a></li>
+						<li><a href="index.php">หน้าหลัก</a></li>
 						<li><a href="store_pop.php">ยอดนิยม</a></li>
 						<li><a href="store_com.php">คอมพิวเตอร์</a></li>
 						<li><a href="store_laptop.php">โน๊ตบุ๊ค</a></li>

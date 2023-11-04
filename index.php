@@ -94,7 +94,7 @@
 								<form method="post" action="store1.php">
 									<select class="input-select" name="select">
 										<option value="0">ทั้งหมด</option>
-										<!-- <option value="1">คอมพิวเตอร์</option>
+										<option value="1">คอมพิวเตอร์</option>
 										<option value="2">ซีพียู</option>
 										<option value="3">การ์ดจอ</option>
 										<option value="4">แรม</option>
@@ -103,7 +103,7 @@
 										<option value="8">คีย์บอร์ด</option>
 										<option value="9">หูฟัง</option>
 										<option value="10">หน้าจอ</option>
-										<option value="11">โน๊ตบุ๊ค</option> -->
+										<option value="11">โน๊ตบุ๊ค</option>
 									</select>
 									<input class="input" name="src" placeholder="ค้นหาสินค้าที่ต้องการ ..." autofocus>
 									<button class="search-btn" type="submit" name="Submit">ค้นหา</button>

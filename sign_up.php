@@ -83,25 +83,39 @@ session_start(); //รู้ว่าใครเป็นคนล็อคอ�
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
-									<select class="input-select">
+								<form method="post" action="store1.php">
+									<select class="input-select" name="select">
 										<option value="0">ทั้งหมด</option>
 										<option value="1">คอมพิวเตอร์</option>
-										<option value="1">โน๊ตบุ๊ค</option>
-										<option value="1">เมาส์</option>
-										<option value="1">คีย์บอร์ด</option>
-										<option value="1">ซีพียู</option>
-										<option value="1">การ์ดจอ</option>
-										<option value="1">เมนบอร์ด</option>
-										<option value="1">แรม</option>
-										<option value="1">พาวเวอร์ซัพพลาย</option>
-										<option value="1">หูฟัง</option>
+										<option value="2">ซีพียู</option>
+										<option value="3">การ์ดจอ</option>
+										<option value="4">แรม</option>
+										<option value="6">พาวเวอร์ซัพพลาย</option>
+										<option value="7">เมาส์</option>
+										<option value="8">คีย์บอร์ด</option>
+										<option value="9">หูฟัง</option>
+										<option value="10">หน้าจอ</option>
+										<option value="11">โน๊ตบุ๊ค</option>
 									</select>
-									<input class="input" placeholder="Search here">
-									<button class="search-btn">Search</button>
+									<input class="input" name="src" placeholder="ค้นหาสินค้าที่ต้องการ ...">
+									<button class="search-btn" type="submit" name="Submit">ค้นหา</button>
 								</form>
+
+								<?php
+								include("connectdb.php");
+								@$src = $_POST['src'];
+								$sql = "SELECT * FROM `products`  WHERE (`name` LIKE '%{$src}%' OR `detail` LIKE '%{$src}%') ORDER BY `products`.`type` ASC";
+
+								$rs = mysqli_query($conn, $sql);
+								while ($data = mysqli_fetch_array($rs)){
+									?>   
+
 							</div>
 						</div>
+						<?php
+						}
+						mysqli_close($conn); //ปิดการเชื่อมต่อฐานข้อมูล
+						?> 
 						<!-- /SEARCH BAR -->
 
 						<!-- ACCOUNT -->
@@ -169,25 +183,6 @@ session_start(); //รู้ว่าใครเป็นคนล็อคอ�
 		</nav>
 		<!-- /NAVIGATION -->
 
-		<!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Checkout</h3>
-						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li class="active">Checkout</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
 
 		<!-- SECTION -->
 		<div class="section">
