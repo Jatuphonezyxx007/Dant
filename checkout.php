@@ -73,6 +73,7 @@ error_reporting(E_NOTICE);
 					<ul class="header-links pull-right">
 						<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
 						<li><a href="sign_up.php"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
+						<li><a href="./admin/src/html/index.php"><i class="fa fa-lock"></i> ADMIN</a></li>
 					</ul>
 				</div>
 			</div>

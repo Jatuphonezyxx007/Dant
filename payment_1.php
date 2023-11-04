@@ -74,6 +74,7 @@ error_reporting(E_NOTICE);
 					<ul class="header-links pull-right">
 						<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
 						<li><a href="sign_up.php"><i class="fa fa-user-o"></i> บัญชีของฉัน</a></li>
+						<li><a href="./admin/src/html/index.php"><i class="fa fa-lock"></i> ADMIN</a></li>
 					</ul>
 				</div>
 			</div>
@@ -357,20 +358,7 @@ error_reporting(E_NOTICE);
 							</div>
 							
 							
-							<a href="" class="primary-btn order-submit" name="save">ยืนยันการชำระสินค้า</a>
-
-							<?php
-						if(isset($_POST['save'])){
-							include("connectdb.php");
-							$cus = mysqli_real_escape_string($conn, $_POST['cus']);
-							$sql = "INSERT INTO `cus_address` (`cus_id`, `cus_name`, `cus_email`, `cus_add`, `cus_zip`, `cus_phone`, `oid`) VALUES (NULL, '{$_POST['fullname']}', '{$_POST['email']}','{$_POST['ads']}','{$_POST['zip-code']}','{$_POST['tel']}','{$_POST['$pid']}' ;";
-							mysqli_query($conn, $sql) or die ("ไม่สามารถเพิ่มข้อมูลได้");
-							echo"<script>";
-							echo"alert('เพิ่มข้อมูลสำเร็จ');";
-							echo"window.location='index.php';";
-							echo"</script>";
-}
-?>
+							<a href="index.php" class="primary-btn order-submit" name="save">ยืนยันการชำระสินค้า</a>
 
 
 

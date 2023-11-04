@@ -214,8 +214,15 @@ session_start(); //รู้ว่าใครเป็นคนล็อคอ�
 						if(isset($_POST['submit'])){
 							include("connectdb.php");
 
+
+							// รับค่าข้อมูลที่กรอกมา
+							$name = $_POST['c_name'];
+							$phone = $_POST['c_tel'];
+							$email = $_POST['c_email']; 
+							$password = $_POST['c_pwd'];
+
 							// เข้ารหัสรหัสผ่านด้วยฟังก์ชัน bcrypt
-							$mem_pwd = password_hash($_POST['mem_pwd'], PASSWORD_DEFAULT);
+							// $mem_pwd = password_hash($_POST['mem_pwd'], PASSWORD_DEFAULT);
 
 							$sql = "INSERT INTO `member` (`mem_id`, `mem_name`, `mem_email`, `mem_pwd`, `mem_phone`) VALUES (Null,'{$_POST['c_name']}','{$_POST['c_email']}', '$mem_pwd', '{$_POST['c_tel']}');";
 							mysqli_query($conn, $sql) or die ("ไม่สามารถสมัครบัญชีได้");
