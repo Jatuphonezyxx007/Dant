@@ -174,7 +174,7 @@
 				<?php
 				include("connectdb.php");
 
-				// $sql = "SELECT p.*, t.t_name as type_name FROM products p INNER JOIN type t ON p.type = t.t_id WHERE '{$_GET['id']}'";
+				// $sql = "SELECT products , t.t_name as type_name FROM products p INNER JOIN type t ON p.type = t.t_id WHERE '{$_GET['id']}'";
 				$sql = "SELECT * FROM `products` WHERE `id` = '{$_GET['id']}'";
 				$rs = mysqli_query($conn, $sql,);
 				$data = mysqli_fetch_array($rs); 
@@ -234,7 +234,7 @@
 							<div>
 								<h3 class="product-price">฿ <?= number_format($data['price'], );?> 
 							</div>
-							<p><?=$data['com_detail'];?></p>
+							<!-- <p><?=$data['detail'];?></p> -->
 						<form method="post" action="">
 							<div class="add-to-cart">
 								<!-- <div class="qty-label">
